@@ -3,7 +3,7 @@
     <div class="container">
       <div class="header-inner">
         <div class="logo">
-          <RouterLink :to="localizedRoutes.home"><img src="/assets/logo.svg" alt="brand-name Logo"></RouterLink>
+          <RouterLink :to="localizedRoutes.home"><img src="/assets/logo.svg" alt="Ziyoli Avlod Logo"></RouterLink>
         </div>
 
         <nav class="main-nav" :class="{ 'is-open': isMobileMenuOpen }">

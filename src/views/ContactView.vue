@@ -70,7 +70,7 @@
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 4H2C1.448 4 1 4.448 1 5V15C1 15.552 1.448 16 2 16H18C18.552 16 19 15.552 19 15V5C19 4.448 18.552 4 18 4ZM17.6 5L10 9.8L2.4 5H17.6ZM2 15V6.2L10 11.2L18 6.2V15H2Z" fill="#2c5282" />
                                     </svg>
-                  <a href="mailto:openresearchuzbekistan@gmail.com">{{ $t('footer.email') }}</a>
+                  <a href="mailto:elbekturdiyev20020707@gmail.com">{{ $t('footer.email') }}</a>
                                 </div>
                             </template>
                         </div>
