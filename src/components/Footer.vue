@@ -457,12 +457,14 @@ onMounted(() => {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive embed: keep aspect ratio and make iframe fill container */
+/* Responsive embed: use modern aspect-ratio so map adapts to any screen size */
 .google-map-wrapper {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* default ratio */
   overflow: hidden;
+  min-height: 200px; /* sensible minimum for small screens */
+  border-radius: 8px;
 }
 
 .google-map-wrapper iframe,
@@ -470,11 +472,26 @@ onMounted(() => {
 .google-map-wrapper object,
 .google-map-wrapper > div {
   position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+  inset: 0 !important; /* shorthand for top/right/bottom/left: 0 */
   width: 100% !important;
   height: 100% !important;
   border: 0 !important;
+  display: block !important;
+}
+
+/* Tweak aspect ratio on very small screens for better vertical space use */
+@media (max-width: 576px) {
+  .google-map-wrapper {
+    aspect-ratio: 4 / 3;
+    min-height: 180px;
+  }
+}
+
+/* Slightly taller map for very large screens */
+@media (min-width: 1200px) {
+  .google-map-wrapper {
+    aspect-ratio: 16 / 7;
+  }
 }
 
 
