@@ -139,7 +139,80 @@ const loadContactData = async () => {
   try {
     const response = await fetchData('/aloqa');
     if (response.data) {
-      contactData.value = response.data;
+      // Sanitize google_maps HTML so backend can't force width/height
+      const data = { ...response.data };
+      if (data.google_maps && typeof window !== 'undefined') {
+        try {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(data.google_maps, 'text/html');
+          const embeds = doc.querySelectorAll('iframe, embed, object, video');
+          embeds.forEach((el) => {
+            // Remove size attributes that prevent responsiveness
+            el.removeAttribute('width');
+            el.removeAttribute('height');
+
+            // Normalize and remove any inline style properties that include width/height (e.g. max-width)
+            const style = el.getAttribute('style');
+            if (style) {
+              const newStyle = style
+                .split(';')
+                .map(s => s.trim())
+                .filter(s => {
+                  if (!s) return false;
+                  // drop any style rule whose property name contains 'width' or 'height'
+                  const prop = s.split(':')[0].trim().toLowerCase();
+                  return !(prop.includes('width') || prop.includes('height'));
+                })
+                .join('; ');
+              if (newStyle) el.setAttribute('style', newStyle);
+              else el.removeAttribute('style');
+            }
+
+            // Force responsive sizing and good defaults
+            try {
+              el.style.width = '100%';
+              el.style.height = '100%';
+              el.style.display = 'block';
+              el.style.border = '0';
+            } catch (e) {
+              // ignore if can't set style
+            }
+
+            // ensure recommended attributes
+            if (!el.getAttribute('loading')) el.setAttribute('loading', 'lazy');
+            if (!el.getAttribute('referrerpolicy')) el.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+            // add a helper class so CSS can target it if needed
+            el.classList.add('responsive-embed');
+          });
+
+          // If the Google widget is wrapped in an extra container that sets size, try to neutralize it
+          const wrappers = doc.querySelectorAll('div');
+          wrappers.forEach((w) => {
+            const style = w.getAttribute('style');
+            if (style && /(width|height)\s*:/i.test(style)) {
+              // remove width/height declarations from wrapper styles
+              const newStyle = style
+                .split(';')
+                .map(s => s.trim())
+                .filter(s => {
+                  if (!s) return false;
+                  const prop = s.split(':')[0].trim().toLowerCase();
+                  return !(prop.includes('width') || prop.includes('height'));
+                })
+                .join('; ');
+              if (newStyle) w.setAttribute('style', newStyle);
+              else w.removeAttribute('style');
+            }
+          });
+
+          data.google_maps = doc.body.innerHTML;
+        } catch (err) {
+          // If sanitization fails, fall back to raw value
+          console.warn('Map HTML sanitization failed:', err);
+        }
+      }
+
+      contactData.value = data;
     }
   } catch (err) {
     console.error('Contact data yuklanmadi:', err);
@@ -376,38 +449,35 @@ onMounted(() => {
   left: 5px;
 }
 
-.footer-map .map-container {
+        .footer-map .map-container {
   width: 100%;
+  max-width: 100%;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  min-height: 250px;
 }
 
+/* Responsive embed: keep aspect ratio and make iframe fill container */
 .google-map-wrapper {
-  width: 100%;
-  height: 100%;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
 }
 
-.google-map-wrapper iframe {
+.google-map-wrapper iframe,
+.google-map-wrapper embed,
+.google-map-wrapper object,
+.google-map-wrapper > div {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
-  height: 250px !important;
-  border: none !important;
-  border-radius: 12px;
-  display: block;
+  height: 100% !important;
+  border: 0 !important;
 }
 
-.map-loading,
-.map-error,
-.map-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 250px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-}
+
 
 .map-loading .loading-spinner {
   margin-bottom: 10px;
