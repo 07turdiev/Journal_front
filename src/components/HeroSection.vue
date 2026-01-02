@@ -76,12 +76,12 @@ const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const latestNews = ref([]);
 
-// API dan oxirgi 5 ta yangilikni olish
+// API dan oxirgi 3 ta yangilikni olish
 const loadLatestNews = async () => {
   try {
     const response = await fetchData('/yangiliklars', { 
       populate: 'Rasmi',
-      'pagination[pageSize]': 5,
+      'pagination[pageSize]': 3,
       'sort[0]': 'publishedAt:desc'
     });
     
