@@ -331,7 +331,7 @@ const handleImageError = (event) => {
 
 <style scoped>
 .page-content {
-  padding: 80px 0;
+  padding: 8px 0;
   background: #ffffff;
   font-family: 'Poppins', sans-serif;
 }

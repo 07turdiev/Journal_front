@@ -53,6 +53,19 @@ function createLocalizedRoutes() {
         meta: routeDef.meta
       })
     })
+    // localized catch-all -> show localized 404 under same layout
+    routes.push({
+      path: `/${locale}/:pathMatch(.*)*`,
+      name: `not-found-${locale}`,
+      component: () => import('../views/NotFoundView.vue'),
+      meta: {
+        title: 'Sahifa topilmadi',
+        breadcrumbs: [
+          { text: 'Bosh sahifa', to: '/' },
+          { text: 'Sahifa topilmadi' }
+        ]
+      }
+    })
   })
 
   return routes
@@ -68,15 +81,17 @@ const routes = [
     }
   },
   {
+    // Global catch-all: redirect non-localized paths to the saved locale so
+    // the localized not-found route renders within the normal layout (header/footer)
     path: '/:pathMatch(.*)*',
-    name: 'not-found',
-    component: () => import('../views/NotFoundView.vue'),
-    meta: {
-      title: 'Sahifa topilmadi',
-      breadcrumbs: [
-        { text: 'Bosh sahifa', to: '/' },
-        { text: 'Sahifa topilmadi' }
-      ]
+    redirect: (to) => {
+      const parts = to.path.split('/').filter(Boolean)
+      const savedLocale = localStorage.getItem('locale') || DEFAULT_LOCALE
+      if (parts.length && SUPPORTED_LOCALES.includes(parts[0])) {
+        // already a localized path; keep as-is
+        return to.path
+      }
+      return `/${savedLocale}${to.path}`
     }
   }
 ]
@@ -102,22 +117,17 @@ router.beforeEach((to, from, next) => {
   const firstPart = pathParts[0]
 
   if (SUPPORTED_LOCALES.includes(firstPart)) {
+    // set the locale when a localized path is visited
     i18n.global.locale.value = firstPart
     localStorage.setItem('locale', firstPart)
-    
-    if (!to.name || to.name === 'not-found') {
-      const pathWithoutLocale = '/' + pathParts.slice(1).join('/')
-      return next(`/${firstPart}${pathWithoutLocale}`)
-    }
-    
-    next()
-  } else if (to.name !== 'not-found') {
-    const savedLocale = localStorage.getItem('locale') || DEFAULT_LOCALE
-    i18n.global.locale.value = savedLocale
-    return next(`/${savedLocale}${path}`)
-  } else {
-    next()
+    return next()
   }
+
+  // For any non-localized path, redirect to the saved/default locale so the
+  // localized routes (including the localized 404) handle rendering.
+  const savedLocale = localStorage.getItem('locale') || DEFAULT_LOCALE
+  i18n.global.locale.value = savedLocale
+  return next(`/${savedLocale}${path}`)
 })
 
 export default router
