@@ -16,6 +16,10 @@
               <RouterLink :to="localizedRoutes.issues">{{ $t('dropdown.journal_issues') }}</RouterLink>
             </li>
 
+            <li>
+              <RouterLink :to="localizedRoutes.projects">{{ $t('projects.title') }}</RouterLink>
+            </li>
+
             <li class="has-dropdown">
               <a href="#" @click.prevent="toggleDropdown('journal')">
                 {{ $t('header.editorial_office') }}
@@ -156,7 +160,8 @@ const localizedRoutes = computed(() => ({
   faq: getLocalizedPath('/faq'),
   issues: getLocalizedPath('/issues'),
   contact: getLocalizedPath('/contact'),
-  authors: getLocalizedPath('/authors')
+  authors: getLocalizedPath('/authors'),
+  projects: getLocalizedPath('/projects')
 }));
 
 const changeLanguage = (lang) => {

@@ -222,5 +222,15 @@
     "view_all_questions": "View all questions",
     "submitting": "Submitting...",
     "success_message": "Your message has been sent successfully!"
+  },
+  "projects": {
+    "title": "Projects",
+    "view_project": "View project",
+    "filter": "Filter",
+    "all_categories": "All categories",
+    "search_placeholder": "Search projects",
+    "no_results": "No results found.",
+    "not_found": "Project not found",
+    "not_found_desc": "Sorry, the requested project does not exist."
   }
 }

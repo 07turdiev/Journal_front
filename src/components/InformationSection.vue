@@ -5,29 +5,34 @@
         <!-- Loading state -->
         <div v-if="loading" class="loading-state">
           <div class="loading-spinner"></div>
-          <p>E'lonlar yuklanmoqda...</p>
+          <p>{{ $t('footer.loading_data') }}</p>
         </div>
         
         <!-- Error state -->
         <div v-else-if="error" class="error-state">
-          <p>Xatolik yuz berdi: {{ error }}</p>
-          <button @click="loadLatestAnnouncements" class="retry-btn">Qayta urinish</button>
+          <p>{{ $t('footer.error_occurred') }}: {{ error }}</p>
+          <button @click="loadLatestAnnouncements" class="retry-btn">{{ $t('footer.retry') }}</button>
         </div>
         
         <!-- No announcements -->
         <div v-else-if="articles.length === 0" class="no-announcements">
-          <p>E'lonlar topilmadi</p>
+          <p>{{ $t('announcements.no_results') }}</p>
         </div>
         
         <!-- Announcements -->
         <div v-else v-for="article in articles" :key="article.id" class="news-card">
           <RouterLink :to="getLocalizedPath(`/announcements/${article.slug}`)" class="card-link">
-            <img :src="article.image" :alt="article.title" class="card-image" @error="handleImageError">
+            <div class="card-image-wrapper">
+              <img :src="article.image" :alt="article.title" class="card-image" @error="handleImageError">
+            </div>
             <div class="card-content">
               <h3 class="card-title">{{ article.title }}</h3>
-              <p class="card-date">{{ article.date }}</p>
-              <!-- Debug info -->
-              <small style="color: #999; font-size: 10px;">Image URL: {{ article.image }}</small>
+              <p class="card-description" v-if="article.content">
+                {{ article.content.substring(0, 120) }}{{ article.content.length > 120 ? '...' : '' }}
+              </p>
+              <div class="card-meta">
+                <span class="card-date">{{ article.date }}</span>
+              </div>
             </div>
           </RouterLink>
         </div>
@@ -66,36 +71,27 @@ const loadLatestAnnouncements = async () => {
     console.log('Announcements API Response:', response);
     
     if (response.data) {
-      articles.value = response.data.map(announcement => {
-        console.log('Announcement data:', announcement);
-        console.log('Rasmi data:', announcement.Rasmi);
-        
-        const imageUrl = getImageUrl(announcement.Rasmi);
-        console.log('Generated image URL:', imageUrl);
-        
-        return {
-          id: announcement.id,
-          title: announcement.Nomi,
-          content: getPlainText(announcement.Text),
-          date: announcement.Sana,
-          slug: announcement.slug,
-          image: imageUrl
-        };
-      });
-      
-      console.log('Final articles:', articles.value);
+      articles.value = response.data.map(announcement => ({
+        id: announcement.id,
+        title: announcement.Nomi,
+        content: getPlainText(announcement.Text),
+        date: announcement.Sana,
+        slug: announcement.slug,
+        image: getImageUrl(announcement.Rasmi)
+      }));
     }
   } catch (err) {
     console.error('Latest announcements yuklanmadi:', err);
   }
 };
 
-// Locale o'zgarishini kuzatish
+const handleImageError = (event) => {
+  event.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect fill="%23e2e8f0" width="400" height="300"/%3E%3Ctext fill="%2394a3b8" font-family="Arial" font-size="18" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3ERasm%3C/text%3E%3C/svg%3E';
+};
+
 watch(currentLocale, () => {
   loadLatestAnnouncements();
 });
-
-
 
 onMounted(() => {
   loadLatestAnnouncements();
@@ -124,36 +120,19 @@ onMounted(() => {
 }
 
 .news-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-}
-
-.news-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: rgb(43, 74, 106);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .news-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  border-color: rgb(43, 74, 106);
-}
-
-.news-card:hover::before {
-  transform: scaleX(1);
+  border-color: #cbd5e0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
 }
 
 .card-link {
@@ -164,12 +143,19 @@ onMounted(() => {
   height: 100%;
 }
 
-.card-image {
+.card-image-wrapper {
   width: 100%;
   height: 220px;
+  overflow: hidden;
+  background: #f7fafc;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
   display: block;
-  transition: transform 0.4s ease;
 }
 
 .news-card:hover .card-image {
@@ -177,42 +163,40 @@ onMounted(() => {
 }
 
 .card-content {
-  padding: 32px;
-  flex-grow: 1;
+  padding: 24px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .card-title {
-  font-weight: 600;
   font-size: 20px;
-  line-height: 1.5;
-  color: rgb(43, 74, 106);
-  margin: 0 0 16px 0;
-  flex-grow: 1;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
 }
 
-.news-card:hover .card-title {
-  color: rgb(44, 62, 80);
+.card-description {
+  font-size: 14px;
+  color: #718096;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+  flex-grow: 1;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
 }
 
 .card-date {
-  font-weight: 400;
-  font-size: 14px;
-  color: #718096;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.card-date::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  background: rgb(43, 74, 106);
-  border-radius: 50%;
+  font-size: 12px;
+  color: #a0aec0;
+  font-weight: 500;
 }
 
 .section-actions {
@@ -259,25 +243,27 @@ onMounted(() => {
   height: 300px;
 }
 
-/* Loading state styles */
 .loading-state {
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 0;
+  padding: 60px 20px;
   text-align: center;
+  background: #f7fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #081330;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #2c5282;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 @keyframes spin {
@@ -286,68 +272,149 @@ onMounted(() => {
 }
 
 .loading-state p {
-  font-size: 18px;
-  color: #666;
+  font-size: 15px;
+  color: #718096;
   margin: 0;
 }
 
-/* Error state styles */
 .error-state {
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 0;
+  padding: 60px 20px;
   text-align: center;
+  background: #f7fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
 
 .error-state p {
-  font-size: 18px;
-  color: #e74c3c;
-  margin: 0 0 20px 0;
+  font-size: 15px;
+  color: #e53e3e;
+  margin: 0 0 16px 0;
 }
 
 .retry-btn {
-  background-color: #081330;
-  color: white;
+  background: #2c5282;
+  color: #ffffff;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.2s ease;
 }
 
 .retry-btn:hover {
-  background-color: #0a1a3a;
+  background: #2a4a7a;
 }
 
-/* No announcements styles */
 .no-announcements {
   grid-column: 1 / -1;
-  padding: 20px;
+  padding: 60px 20px;
   text-align: center;
-  color: rgba(7, 25, 70, 0.7);
-  background: #FFFFFF;
-  border-radius: 4px;
-  font-size: 18px;
+  color: #718096;
+  background: #f7fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-size: 16px;
 }
 
-/* RESPONSIVE STILLAR */
+@media (max-width: 1280px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .news-grid {
+    gap: 24px;
+  }
+
+  .card-image-wrapper {
+    height: 200px;
+  }
+}
+
 @media (max-width: 992px) {
   .news-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
+  .news-section {
+    padding: 100px 0 80px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
   .news-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card-image-wrapper {
+    height: 180px;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 18px;
   }
 
   .section-actions {
     text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .news-section {
+    padding: 80px 0 60px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .news-grid {
+    gap: 16px;
+  }
+
+  .card-image-wrapper {
+    height: 200px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-description {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .card-image-wrapper {
+    height: 180px;
   }
 }
 </style>

@@ -54,6 +54,8 @@ const translateText = computed(() => {
       'Tez-tez beriladigan savollar': t('faq.title'),
       'Mualliflar': t('authors.title'),
       'Muallif': t('authors.title'),
+      'Loyihalar': t('projects.title'),
+      'Loyiha': t('projects.title'),
       'Sahifa topilmadi': 'Sahifa topilmadi'
     };
     

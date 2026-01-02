@@ -5,39 +5,45 @@
       <div class="container">
         <div class="news-controls">
           <form class="controls-form" @submit.prevent="applyFilters">
-            <input type="text" v-model="search" placeholder="Yangiliklarni qidirish">
+            <input type="text" v-model="search" :placeholder="$t('news.search_placeholder')">
             <select v-model="sort">
-              <option value="newest">Avval yangilari</option>
-              <option value="oldest">Avval eskilari</option>
+              <option value="newest">{{ $t('news.sort_newest') }}</option>
+              <option value="oldest">{{ $t('news.sort_oldest') }}</option>
             </select>
-            <button type="submit" class="btn-apply">Qidirish</button>
-            <button type="button" class="btn-clear" @click="clearFilters">Tozalash</button>
+            <button type="submit" class="btn-apply">{{ $t('news.search_btn') }}</button>
+            <button type="button" class="btn-clear" @click="clearFilters">{{ $t('news.clear_btn') }}</button>
           </form>
         </div>
         <!-- Loading state -->
         <div v-if="loading" class="loading-state">
           <div class="loading-spinner"></div>
-          <p>Ma'lumotlar yuklanmoqda...</p>
+          <p>{{ $t('footer.loading_data') }}</p>
         </div>
         
         <!-- Error state -->
         <div v-else-if="error" class="error-state">
-          <p>Xatolik yuz berdi: {{ error }}</p>
-          <button @click="loadNewsData" class="retry-btn">Qayta urinish</button>
+          <p>{{ $t('footer.error_occurred') }}: {{ error }}</p>
+          <button @click="loadNewsData" class="retry-btn">{{ $t('footer.retry') }}</button>
         </div>
         
         <!-- Content -->
         <div v-else class="news-grid">
           <div v-if="filteredArticles.length === 0" class="no-results">
-            Natija topilmadi.
+            {{ $t('news.no_results') }}
           </div>
           <div v-for="(article, index) in paginatedArticles" :key="article.slug || index" class="news-card">
             <RouterLink :to="getLocalizedPath(`/news/${article.slug}`)" class="card-link">
-              <img :src="article.image" :alt="article.title" class="card-image" @error="handleImageError">
+              <div class="card-image-wrapper">
+                <img :src="article.image" :alt="article.title" class="card-image" @error="handleImageError">
+              </div>
               <div class="card-content">
                 <h3 class="card-title" v-html="getHighlightedHtml(article.title, search)"></h3>
-                <p class="card-date">{{ article.date }}</p>
-                <p class="card-excerpt" v-if="search && getPlainText(article.content)" v-html="getHighlightedExcerpt(article.content, search)"></p>
+                <p class="card-description" v-if="getPlainText(article.content)">
+                  {{ getPlainText(article.content).substring(0, 120) }}{{ getPlainText(article.content).length > 120 ? '...' : '' }}
+                </p>
+                <div class="card-meta">
+                  <span class="card-date">{{ article.date }}</span>
+                </div>
               </div>
             </RouterLink>
           </div>
@@ -102,9 +108,8 @@ const loadNewsData = async () => {
   }
 };
 
-// Rasm yuklanmagan taqdirda placeholder ko'rsatish
 const handleImageError = (event) => {
-  event.target.src = 'https://placehold.co/600x400?text=Rasm';
+  event.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"%3E%3Crect fill="%23e2e8f0" width="400" height="300"/%3E%3Ctext fill="%2394a3b8" font-family="Arial" font-size="18" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3ERasm%3C/text%3E%3C/svg%3E';
 };
 
 // Locale o'zgarishini kuzatish
@@ -238,17 +243,19 @@ const getHighlightedExcerpt = (html, queryText) => {
 <style scoped>
 .page-content {
   padding: 80px 0;
-  background-color: #FFFFFF;
+  background: #ffffff;
+  font-family: 'Poppins', sans-serif;
 }
 
 .container {
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 20px;
+  width: 100%;
 }
 
 .news-controls {
-  margin-bottom: 24px;
+  margin-bottom: 40px;
 }
 
 .controls-form {
@@ -261,29 +268,63 @@ const getHighlightedExcerpt = (html, queryText) => {
 
 .controls-form input,
 .controls-form select {
-  padding: 10px 12px;
-  border: 1px solid rgba(7, 25, 70, 0.2);
-  border-radius: 4px;
-  background: #FFFFFF;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
   font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  color: #2d3748;
+  transition: all 0.2s ease;
+}
+
+.controls-form input:focus,
+.controls-form select:focus {
+  outline: none;
+  border-color: #2c5282;
+  box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
+}
+
+.controls-form input::placeholder {
+  color: #a0aec0;
 }
 
 .btn-apply {
-  padding: 10px 16px;
-  border-radius: 4px;
-  background: #072AC8;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: #2c5282;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
   border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.btn-apply:hover {
+  background: #2a4a7a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(44, 82, 130, 0.3);
 }
 
 .btn-clear {
-  padding: 10px 16px;
-  border-radius: 4px;
+  padding: 12px 24px;
+  border-radius: 8px;
   background: transparent;
-  color: #072AC8;
-  font-weight: 700;
-  border: 1px solid #072AC8;
+  color: #2c5282;
+  font-weight: 600;
+  border: 1px solid #2c5282;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.btn-clear:hover {
+  background: #ebf8ff;
+  border-color: #2a4a7a;
+  color: #2a4a7a;
 }
 
 .news-grid {
@@ -295,23 +336,29 @@ const getHighlightedExcerpt = (html, queryText) => {
 
 .no-results {
   grid-column: 1 / -1;
-  padding: 20px;
+  padding: 60px 20px;
   text-align: center;
-  color: rgba(7, 25, 70, 0.7);
-  background: #F2F3F4;
-  border-radius: 4px;
+  color: #718096;
+  background: #f7fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-size: 16px;
 }
 
 .news-card {
-  background: #F2F3F4;
-  border-radius: 4px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .news-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
 }
 
 .card-link {
@@ -322,63 +369,88 @@ const getHighlightedExcerpt = (html, queryText) => {
   height: 100%;
 }
 
-.card-image {
+.card-image-wrapper {
   width: 100%;
   height: 220px;
+  overflow: hidden;
+  background: #f7fafc;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
   display: block;
-  background-color: #BDBDBD;
+}
+
+.news-card:hover .card-image {
+  transform: scale(1.05);
 }
 
 .card-content {
-  padding: 32px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
 }
 
 .card-title {
-  font-weight: 700;
   font-size: 20px;
-  line-height: 1.5;
-  color: #081330;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #718096;
+  line-height: 1.6;
   margin: 0 0 16px 0;
+  flex-grow: 1;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
 }
 
 .card-date {
-  font-weight: 400;
-  font-size: 16px;
-  color: rgba(7, 25, 70, 0.7);
-  margin: 0;
-}
-
-.card-excerpt {
-  margin-top: 12px;
-  font-size: 14px;
-  color: rgba(7, 25, 70, 0.8);
+  font-size: 12px;
+  color: #a0aec0;
+  font-weight: 500;
 }
 
 .hl {
-  background-color: #FFF700;
-  padding: 0 2px;
+  background-color: #fef08a;
+  padding: 2px 4px;
+  border-radius: 3px;
 }
 
-/* Loading state styles */
 .loading-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 0;
+  padding: 60px 20px;
   text-align: center;
+  background: #f7fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #081330;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #2c5282;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 @keyframes spin {
@@ -387,40 +459,44 @@ const getHighlightedExcerpt = (html, queryText) => {
 }
 
 .loading-state p {
-  font-size: 18px;
-  color: #666;
+  font-size: 15px;
+  color: #718096;
   margin: 0;
 }
 
-/* Error state styles */
 .error-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 0;
+  padding: 60px 20px;
   text-align: center;
+  background: #f7fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
 
 .error-state p {
-  font-size: 18px;
-  color: #e74c3c;
-  margin: 0 0 20px 0;
+  font-size: 15px;
+  color: #e53e3e;
+  margin: 0 0 16px 0;
 }
 
 .retry-btn {
-  background-color: #081330;
-  color: white;
+  background: #2c5282;
+  color: #ffffff;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.2s ease;
 }
 
 .retry-btn:hover {
-  background-color: #0a1a3a;
+  background: #2a4a7a;
 }
 
 .pagination {
@@ -428,6 +504,7 @@ const getHighlightedExcerpt = (html, queryText) => {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin-top: 40px;
 }
 
 .page-number,
@@ -435,36 +512,131 @@ const getHighlightedExcerpt = (html, queryText) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: 700;
-  color: #081330;
-  background-color: #F2F3F4;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  color: #2d3748;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
 }
 
 .page-number.active,
 .page-number:hover {
-  background-color: #072AC8;
-  color: #FFFFFF;
+  background: #2c5282;
+  color: #ffffff;
+  border-color: #2c5282;
 }
 
 .page-arrow:hover {
-  background-color: #072AC8;
-  color: #FFFFFF;
+  background: #2c5282;
+  color: #ffffff;
+  border-color: #2c5282;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .news-grid {
+    gap: 24px;
+  }
+
+  .card-image-wrapper {
+    height: 200px;
+  }
 }
 
 @media (max-width: 992px) {
   .news-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
+  .page-content {
+    padding: 60px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .news-grid {
+    gap: 20px;
+  }
+
+  .card-image-wrapper {
+    height: 180px;
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-content {
+    padding: 40px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
   .news-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card-image-wrapper {
+    height: 200px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-description {
+    font-size: 13px;
+  }
+
+  .controls-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls-form input,
+  .controls-form select,
+  .btn-apply,
+  .btn-clear {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .card-image-wrapper {
+    height: 180px;
   }
 }
 </style>

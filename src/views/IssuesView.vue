@@ -47,10 +47,9 @@
                                         <path d="M16.6667 5L7.50004 14.1667L3.33337 10" stroke="#4A90E2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                     <h3 class="article-title">
-                                        <RouterLink v-if="article.slug" :to="getLocalizedPath(`/issues/${article.slug}`)" class="title-link">
-                                    {{ article.title }}
+                                        <RouterLink v-if="article.slug" :to="getLocalizedPath(`/issues/${article.slug}`)" class="title-link" v-html="getHighlightedHtml(article.title, searchQuery)">
                                 </RouterLink>
-                                <span v-else>{{ article.title }}</span>
+                                <span v-else v-html="getHighlightedHtml(article.title, searchQuery)"></span>
                                     </h3>
                             </div>
                                 <div class="article-author">
@@ -62,7 +61,7 @@
                             </div>
 
                             <div class="card-body">
-                                <p class="article-abstract">{{ article.abstract || 'Maqola annotatsiyasi mavjud emas.' }}</p>
+                                <p class="article-abstract" v-html="getHighlightedHtml(article.abstract || 'Maqola annotatsiyasi mavjud emas.', searchQuery)"></p>
                             </div>
                             
                             <div class="card-footer">
@@ -154,9 +153,8 @@ const filteredArticles = computed(() => {
     return articles.value.filter(a => {
         const matchesAuthor = selectedAuthor.value ? a.author === selectedAuthor.value : true;
         const matchesQuery = q
-            ? (a.id?.toLowerCase().includes(q)
-                || a.title?.toLowerCase().includes(q)
-                || a.author?.toLowerCase().includes(q))
+            ? (a.title?.toLowerCase().includes(q)
+                || a.abstract?.toLowerCase().includes(q))
             : true;
         return matchesAuthor && matchesQuery;
     });
@@ -259,6 +257,27 @@ watch(currentLocale, () => {
 watch([selectedAuthor, searchQuery], () => {
     currentPage.value = 1;
 });
+
+const escapeHtml = (str) => {
+    return (str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+};
+
+const getHighlightedHtml = (text, queryText) => {
+    const raw = String(text || '');
+    const q = String(queryText || '').trim();
+    if (!q) return escapeHtml(raw);
+    try {
+        const pattern = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        return escapeHtml(raw).replace(pattern, (m) => `<mark class="hl">${escapeHtml(m)}</mark>`);
+    } catch (e) {
+        return escapeHtml(raw);
+    }
+};
 
 onMounted(() => {
     loadArticlesData();
@@ -666,5 +685,11 @@ onMounted(() => {
     .card-footer {
         margin-left: 0;
     }
+}
+
+.hl {
+    background-color: #fef08a;
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 </style>

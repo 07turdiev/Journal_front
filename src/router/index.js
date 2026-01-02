@@ -32,6 +32,8 @@ function createLocalizedRoutes() {
     { path: 'faq', name: 'faq', component: () => import('../views/FaqView.vue'), meta: { title: 'Tez-tez eriladigan savollar', breadcrumbs: [{ text: 'Bosh sahifa', to: '/' }, { text: 'Aloqa' }, { text: 'Tez-tez beriladigan savollar' }] } },
     { path: 'authors', name: 'authors', component: () => import('../views/AuthorsView.vue'), meta: { title: 'Mualliflar', breadcrumbs: [{ text: 'Bosh sahifa', to: '/' }, { text: 'Mualliflar' }] } },
     { path: 'author/:slug', name: 'author-detail', component: () => import('../views/AuthorDetailView.vue'), meta: { title: 'Muallif', breadcrumbs: [{ text: 'Bosh sahifa', to: '/' }, { text: 'Mualliflar', to: '/authors' }] } },
+    { path: 'projects', name: 'projects', component: () => import('../views/ProjectsView.vue'), meta: { title: 'Loyihalar', breadcrumbs: [{ text: 'Bosh sahifa', to: '/' }, { text: 'Loyihalar' }] } },
+    { path: 'projects/:slug', name: 'project-detail', component: () => import('../views/ProjectDetailView.vue'), meta: { title: 'Loyiha', breadcrumbs: [{ text: 'Bosh sahifa', to: '/' }, { text: 'Loyihalar', to: '/projects' }] } },
     { path: 'archive/:id', redirect: (to) => {
       const locale = to.path.split('/')[1] || 'uz';
       return `/${locale}/issues`;
