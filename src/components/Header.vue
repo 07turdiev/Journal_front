@@ -225,7 +225,7 @@ watch(() => route.fullPath, () => {
 }
 
 .logo img {
-  height: 45px;
+  height: 60px;
   width: auto;
   filter: brightness(1.2) contrast(1.1);
   transition: transform 0.3s ease;
