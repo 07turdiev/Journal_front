@@ -90,10 +90,21 @@
                                     </svg>
                                     Yuklab olish
                                 </button>
+                                <a
+                                    v-if="article.googleScholar"
+                                    :href="article.googleScholar"
+                                    class="btn-scholar"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    :title="`Google Scholar: ${article.title}`"
+                                    aria-label="Open in Google Scholar"
+                                >
+                                    <img src="/assets/scholar.svg" alt="Google Scholar" class="scholar-icon" />
+                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
                 <div class="table-footer">
                     <div class="pagination" v-if="totalItems > pageSize">
@@ -196,10 +207,10 @@ const loadArticlesData = async () => {
             articles.value = response.data.map(article => {
                 const abstract = article.Annotatsiya || '';
                 const formattedDate = article.sana ? formatDate(article.sana) : null;
-                
+
                 return {
                     id: `#${article.maqola_id || article.id}`,
-                documentId: article.documentId,
+                    documentId: article.documentId,
                     slug: article.slug || null,
                     category: null, // Yangi API'da category yo'q
                     title: article.mavzu || '',
@@ -211,9 +222,11 @@ const loadArticlesData = async () => {
                     issue: null,
                     volumeIssue: article.son || null,
                     doi: null, // Yangi API'da DOI yo'q
-                type: 'primary',
-                pdfUrl: article.pdf?.url ? getImageUrl(article.pdf) : null,
-                pdfName: article.pdf?.name || 'Maqola.pdf'
+                    type: 'primary',
+                    pdfUrl: article.pdf?.url ? getImageUrl(article.pdf) : null,
+                    pdfName: article.pdf?.name || 'Maqola.pdf',
+                    // Google Scholar link (may be undefined/null)
+                    googleScholar: article.google_scholar || null
                 };
             });
         }
@@ -494,6 +507,32 @@ onMounted(() => {
     font-weight: 500;
     color: #171B1E;
     cursor: default;
+}
+
+.btn-scholar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 6px;
+    background: transparent; /* keep background neutral for a small icon */
+    color: #171B1E;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.scholar-icon {
+    width: 70px;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 576px) {
+    .scholar-icon {
+        width: 22px;
+    }
 }
 
 .btn-date svg {

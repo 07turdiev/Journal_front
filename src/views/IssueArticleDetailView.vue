@@ -56,6 +56,11 @@
                 </svg>
                 <span class="meta-value">{{ article.author.name }}</span>
               </div>
+              <div class="meta-item" v-if="article.googleScholar">
+                <a :href="article.googleScholar" target="_blank" rel="noopener noreferrer" class="btn-scholar-meta" :title="`Google Scholar: ${article.Mavzu}`" aria-label="Open in Google Scholar">
+                  <img src="/assets/scholar.svg" alt="Google Scholar" class="scholar-icon-meta" />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -200,6 +205,8 @@ const loadArticleData = async () => {
           name: articleData.Muallif,
           slug: null // Yangi API'da author slug yo'q
         } : null
+        ,
+        googleScholar: articleData.google_scholar || null
       };
       if (pdfBlobUrl.value) {
         URL.revokeObjectURL(pdfBlobUrl.value);
@@ -404,6 +411,29 @@ onUnmounted(() => {
   color: #081330;
   font-size: 16px;
   font-weight: 500;
+}
+
+.btn-scholar-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.scholar-icon-meta {
+  width: 80px;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 576px) {
+  .scholar-icon-meta {
+    width: 22px;
+  }
 }
 
 .author-link {
