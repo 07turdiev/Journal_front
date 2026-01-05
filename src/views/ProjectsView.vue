@@ -112,88 +112,18 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 
-const projects = ref([
-  {
-    id: 1,
-    slug: 'ilmiy-tadqiqot-loyihasi',
-    title: 'Ilmiy Tadqiqot Loyihasi',
-    description: 'Bu loyiha ilmiy tadqiqotlar va innovatsion yechimlarni rivojlantirishga qaratilgan. Loyiha davomida turli sohalarda muhim natijalar erishildi.',
-    date: '2024-yil Yanvar',
-    category: 'Ilmiy Tadqiqot',
-    image: '/assets/project-1.jpg',
-    link: '#'
-  },
-  {
-    id: 2,
-    slug: 'talim-tizimini-rivojlantirish',
-    title: 'Ta\'lim Tizimini Rivojlantirish',
-    description: 'Zamonaviy ta\'lim metodlarini joriy etish va ta\'lim sifatini oshirish bo\'yicha keng qamrovli loyiha. Bu loyiha ta\'lim sohasida muhim o\'zgarishlarni olib keldi.',
-    date: '2024-yil Fevral',
-    category: 'Ta\'lim',
-    image: '/assets/project-2.jpg',
-    link: '#'
-  },
-  {
-    id: 3,
-    slug: 'texnologik-innovatsiyalar',
-    title: 'Texnologik Innovatsiyalar',
-    description: 'Zamonaviy texnologiyalarni qo\'llash va yangi yechimlar ishlab chiqish bo\'yicha loyiha. Bu loyiha turli sohalarda samarali natijalar berdi.',
-    date: '2024-yil Mart',
-    category: 'Texnologiya',
-    image: '/assets/project-3.jpg',
-    link: '#'
-  },
-  {
-    id: 4,
-    slug: 'ijtimoiy-dasturlar',
-    title: 'Ijtimoiy Dasturlar',
-    description: 'Jamiyatning turli qatlamlariga yordam ko\'rsatish va ijtimoiy muammolarni hal qilish bo\'yicha loyiha. Bu loyiha ko\'plab odamlarga foyda keltirdi.',
-    date: '2024-yil Aprel',
-    category: 'Ijtimoiy',
-    image: '/assets/project-4.jpg',
-    link: '#'
-  },
-  {
-    id: 5,
-    slug: 'ekologik-tahlil',
-    title: 'Ekologik Tahlil',
-    description: 'Atrof-muhitni muhofaza qilish va ekologik muammolarni hal qilish bo\'yicha loyiha. Bu loyiha ekologik barqarorlikni ta\'minlashga yordam berdi.',
-    date: '2024-yil May',
-    category: 'Ekologiya',
-    image: '/assets/project-5.jpg',
-    link: '#'
-  },
-  {
-    id: 7,
-    slug: 'madaniy-merosni-organish',
-    title: 'Madaniy Merosni O\'rganish',
-    description: 'Milliy madaniy merosni o\'rganish, saqlash va targ\'ib qilish bo\'yicha loyiha. Bu loyiha madaniy qadriyatlarni yangi avlodga yetkazishga yordam berdi.',
-    date: '2024-yil Iyun',
-    category: 'Madaniyat',
-    image: '/assets/project-6.jpg',
-    link: '#'
-  },
-  {
-    id: 8,
-    slug: 'sogliqni-saqlash-tizimi',
-    title: 'Sog\'liqni Saqlash Tizimi',
-    description: 'Sog\'liqni saqlash sohasida zamonaviy yondashuvlarni joriy etish va tibbiy xizmatlar sifatini oshirish bo\'yicha loyiha. Bu loyiha aholi salomatligini yaxshilashga yordam berdi.',
-    date: '2024-yil Iyul',
-    category: 'Sog\'liqni Saqlash',
-    image: '/assets/project-7.jpg',
-    link: '#'
-  },
-  {
-    id: 9,
-    slug: 'qishloq-xojaligi-innovatsiyalari',
-    title: 'Qishloq Xo\'jaligi Innovatsiyalari',
-    description: 'Qishloq xo\'jaligida zamonaviy texnologiyalarni qo\'llash va qishloq xo\'jaligi mahsulotlarini oshirish bo\'yicha loyiha. Bu loyiha qishloq xo\'jaligini rivojlantirishga muhim hissa qo\'shdi.',
-    date: '2024-yil Avgust',
-    category: 'Qishloq Xo\'jaligi',
-    image: '/assets/project-8.jpg',
-    link: '#'
-  }
-]);
+const projects = ref([])
+
+// Helper: choose best image from Strapi response
+const pickImage = (rasmi) => {
+  if (!rasmi) return null
+  // formats.medium preferred, then small, then root url
+  const formats = rasmi.formats || {}
+  if (formats.medium && formats.medium.url) return { url: formats.medium.url }
+  if (formats.small && formats.small.url) return { url: formats.small.url }
+  if (rasmi.url) return { url: rasmi.url }
+  return null
+}
 
 const selectedCategory = ref('');
 const searchQuery = ref('');
@@ -273,9 +203,8 @@ const goToNextPage = () => {
   }
 };
 
-watch([selectedCategory, searchQuery], () => {
-  currentPage.value = 1;
-});
+// Reset to first page when filters change
+// (handled above)
 
 watch(filteredProjects, () => {
   if (currentPage.value > totalPages.value) {
@@ -306,11 +235,31 @@ const getHighlightedHtml = (text, queryText) => {
 
 const loadProjectsData = async () => {
   try {
-    console.log('Loading projects data...');
+    console.log('Loading projects data...')
+    const res = await fetchData('/loyihalars', { populate: 'rasmi' })
+    const items = res && res.data ? res.data : []
+
+    projects.value = items.map((item) => {
+      // Support both Strapi shapes: item.attributes or direct fields
+      const data = item.attributes ? item.attributes : item
+
+      const img = pickImage(data.rasmi)
+
+      return {
+        id: item.id || data.id,
+        slug: data.slug || '',
+        title: data.nomi || data.title || '',
+        description: data.tavsif || data.description || '',
+        date: data.sana ? new Date(data.sana).toLocaleDateString() : (data.sana || ''),
+        category: data.yanalish || data.category || '',
+        image: getImageUrl(img),
+        link: data.link || '#'
+      }
+    })
   } catch (err) {
-    console.error('Projects data yuklanmadi:', err);
+    console.error('Projects data yuklanmadi:', err)
   }
-};
+}
 
 watch([selectedCategory, searchQuery], () => {
   currentPage.value = 1;

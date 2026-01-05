@@ -62,125 +62,74 @@ import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
+import { useApi } from '@/composables/useApi';
+import { parseMarkdown, parseRichText } from '@/utils/richTextParser';
+import DOMPurify from 'dompurify';
 
 const route = useRoute();
 const { t } = useI18n();
 
-const loading = ref(false);
-const error = ref(null);
+const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const project = ref(null);
 
-const staticProjects = [
-  {
-    id: 1,
-    slug: 'ilmiy-tadqiqot-loyihasi',
-    title: 'Ilmiy Tadqiqot Loyihasi',
-    description: 'Bu loyiha ilmiy tadqiqotlar va innovatsion yechimlarni rivojlantirishga qaratilgan. Loyiha davomida turli sohalarda muhim natijalar erishildi.',
-    fullDescription: '<p>Bu loyiha ilmiy tadqiqotlar va innovatsion yechimlarni rivojlantirishga qaratilgan. Loyiha davomida turli sohalarda muhim natijalar erishildi.</p><p>Loyiha maqsadi - zamonaviy ilmiy tadqiqotlar orqali yangi bilimlar va texnologiyalarni yaratish, jamiyatning turli sohalarida qo\'llash va rivojlantirishdir.</p>',
-    date: '2024-yil Yanvar',
-    category: 'Ilmiy Tadqiqot',
-    image: '/assets/project-1.jpg',
-    link: '#'
-  },
-  {
-    id: 2,
-    slug: 'talim-tizimini-rivojlantirish',
-    title: 'Ta\'lim Tizimini Rivojlantirish',
-    description: 'Zamonaviy ta\'lim metodlarini joriy etish va ta\'lim sifatini oshirish bo\'yicha keng qamrovli loyiha. Bu loyiha ta\'lim sohasida muhim o\'zgarishlarni olib keldi.',
-    fullDescription: '<p>Zamonaviy ta\'lim metodlarini joriy etish va ta\'lim sifatini oshirish bo\'yicha keng qamrovli loyiha. Bu loyiha ta\'lim sohasida muhim o\'zgarishlarni olib keldi.</p><p>Loyiha doirasida ta\'lim tizimini modernizatsiya qilish, yangi o\'quv metodlarini joriy etish va ta\'lim sifatini oshirish bo\'yicha ishlar amalga oshirildi.</p>',
-    date: '2024-yil Fevral',
-    category: 'Ta\'lim',
-    image: '/assets/project-2.jpg',
-    link: '#'
-  },
-  {
-    id: 3,
-    slug: 'texnologik-innovatsiyalar',
-    title: 'Texnologik Innovatsiyalar',
-    description: 'Zamonaviy texnologiyalarni qo\'llash va yangi yechimlar ishlab chiqish bo\'yicha loyiha. Bu loyiha turli sohalarda samarali natijalar berdi.',
-    fullDescription: '<p>Zamonaviy texnologiyalarni qo\'llash va yangi yechimlar ishlab chiqish bo\'yicha loyiha. Bu loyiha turli sohalarda samarali natijalar berdi.</p><p>Loyiha maqsadi - innovatsion texnologiyalarni joriy etish, yangi yechimlar ishlab chiqish va ularni amaliyotga tatbiq etishdir.</p>',
-    date: '2024-yil Mart',
-    category: 'Texnologiya',
-    image: '/assets/project-3.jpg',
-    link: '#'
-  },
-  {
-    id: 4,
-    slug: 'ijtimoiy-dasturlar',
-    title: 'Ijtimoiy Dasturlar',
-    description: 'Jamiyatning turli qatlamlariga yordam ko\'rsatish va ijtimoiy muammolarni hal qilish bo\'yicha loyiha. Bu loyiha ko\'plab odamlarga foyda keltirdi.',
-    fullDescription: '<p>Jamiyatning turli qatlamlariga yordam ko\'rsatish va ijtimoiy muammolarni hal qilish bo\'yicha loyiha. Bu loyiha ko\'plab odamlarga foyda keltirdi.</p><p>Loyiha doirasida ijtimoiy muammolarni hal qilish, jamiyatning turli qatlamlariga yordam ko\'rsatish va ijtimoiy adolatni ta\'minlash bo\'yicha ishlar amalga oshirildi.</p>',
-    date: '2024-yil Aprel',
-    category: 'Ijtimoiy',
-    image: '/assets/project-4.jpg',
-    link: '#'
-  },
-  {
-    id: 5,
-    slug: 'ekologik-tahlil',
-    title: 'Ekologik Tahlil',
-    description: 'Atrof-muhitni muhofaza qilish va ekologik muammolarni hal qilish bo\'yicha loyiha. Bu loyiha ekologik barqarorlikni ta\'minlashga yordam berdi.',
-    fullDescription: '<p>Atrof-muhitni muhofaza qilish va ekologik muammolarni hal qilish bo\'yicha loyiha. Bu loyiha ekologik barqarorlikni ta\'minlashga yordam berdi.</p><p>Loyiha maqsadi - atrof-muhitni muhofaza qilish, ekologik muammolarni hal qilish va barqaror rivojlanishni ta\'minlashdir.</p>',
-    date: '2024-yil May',
-    category: 'Ekologiya',
-    image: '/assets/project-5.jpg',
-    link: '#'
-  },
-  {
-    id: 6,
-    slug: 'madaniy-merosni-organish',
-    title: 'Madaniy Merosni O\'rganish',
-    description: 'Milliy madaniy merosni o\'rganish, saqlash va targ\'ib qilish bo\'yicha loyiha. Bu loyiha madaniy qadriyatlarni yangi avlodga yetkazishga yordam berdi.',
-    fullDescription: '<p>Milliy madaniy merosni o\'rganish, saqlash va targ\'ib qilish bo\'yicha loyiha. Bu loyiha madaniy qadriyatlarni yangi avlodga yetkazishga yordam berdi.</p><p>Loyiha doirasida milliy madaniy merosni o\'rganish, saqlash va targ\'ib qilish, madaniy qadriyatlarni yangi avlodga yetkazish bo\'yicha ishlar amalga oshirildi.</p>',
-    date: '2024-yil Iyun',
-    category: 'Madaniyat',
-    image: '/assets/project-6.jpg',
-    link: '#'
-  },
-  {
-    id: 7,
-    slug: 'sogliqni-saqlash-tizimi',
-    title: 'Sog\'liqni Saqlash Tizimi',
-    description: 'Sog\'liqni saqlash sohasida zamonaviy yondashuvlarni joriy etish va tibbiy xizmatlar sifatini oshirish bo\'yicha loyiha. Bu loyiha aholi salomatligini yaxshilashga yordam berdi.',
-    fullDescription: '<p>Sog\'liqni saqlash sohasida zamonaviy yondashuvlarni joriy etish va tibbiy xizmatlar sifatini oshirish bo\'yicha loyiha. Bu loyiha aholi salomatligini yaxshilashga yordam berdi.</p><p>Loyiha maqsadi - tibbiy xizmatlar sifatini oshirish, zamonaviy tibbiy texnologiyalarni joriy etish va aholi salomatligini yaxshilashdir.</p>',
-    date: '2024-yil Iyul',
-    category: 'Sog\'liqni Saqlash',
-    image: '/assets/project-7.jpg',
-    link: '#'
-  },
-  {
-    id: 8,
-    slug: 'qishloq-xojaligi-innovatsiyalari',
-    title: 'Qishloq Xo\'jaligi Innovatsiyalari',
-    description: 'Qishloq xo\'jaligida zamonaviy texnologiyalarni qo\'llash va qishloq xo\'jaligi mahsulotlarini oshirish bo\'yicha loyiha. Bu loyiha qishloq xo\'jaligini rivojlantirishga muhim hissa qo\'shdi.',
-    fullDescription: '<p>Qishloq xo\'jaligida zamonaviy texnologiyalarni qo\'llash va qishloq xo\'jaligi mahsulotlarini oshirish bo\'yicha loyiha. Bu loyiha qishloq xo\'jaligini rivojlantirishga muhim hissa qo\'shdi.</p><p>Loyiha doirasida qishloq xo\'jaligida zamonaviy texnologiyalarni joriy etish, mahsulotlar sifatini oshirish va qishloq xo\'jaligini rivojlantirish bo\'yicha ishlar amalga oshirildi.</p>',
-    date: '2024-yil Avgust',
-    category: 'Qishloq Xo\'jaligi',
-    image: '/assets/project-8.jpg',
-    link: '#'
-  }
-];
+// Helper: choose best image from Strapi response
+const pickImage = (rasmi) => {
+  if (!rasmi) return null;
+  const formats = rasmi.formats || {};
+  if (formats.large && formats.large.url) return { url: formats.large.url };
+  if (formats.medium && formats.medium.url) return { url: formats.medium.url };
+  if (formats.small && formats.small.url) return { url: formats.small.url };
+  if (rasmi.url) return { url: rasmi.url };
+  return null;
+};
+
+// staticProjects removed — data is now fetched from API
 
 const loadProjectData = async (slug) => {
   try {
-    loading.value = true;
-    error.value = null;
-    
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    const foundProject = staticProjects.find(p => p.slug === slug);
-    
-    if (foundProject) {
-      project.value = foundProject;
+    project.value = null
+
+    // Query Strapi by slug using filters
+    const res = await fetchData('/loyihalars', { populate: 'rasmi', 'filters[slug][$eq]': slug, 'pagination[limit]': 1 })
+    const items = res && res.data ? res.data : []
+    const item = items[0]
+
+    if (!item) {
+      project.value = null
+      return
+    }
+
+    const data = item.attributes ? item.attributes : item
+    const img = pickImage(data.rasmi)
+
+    let fullDesc = ''
+
+    if (typeof data.text === 'string' && data.text.trim() !== '') {
+      fullDesc = parseMarkdown(data.text)
+    } else if (Array.isArray(data.text) && data.text.length) {
+      // parse structured rich text blocks and sanitize the result
+      fullDesc = DOMPurify.sanitize(parseRichText(data.text), {
+        ADD_TAGS: ['center'],
+        ADD_ATTR: ['target', 'rel']
+      })
     } else {
-      project.value = null;
+      fullDesc = data.fullDescription || ''
+    }
+
+    project.value = {
+      id: item.id || data.id,
+      slug: data.slug || '',
+      title: data.nomi || data.title || '',
+      description: data.tavsif || data.description || '',
+      fullDescription: fullDesc,
+      date: data.sana ? new Date(data.sana).toLocaleDateString() : (data.sana || ''),
+      category: data.yanalish || data.category || '',
+      image: getImageUrl(img),
+      link: data.link || '#'
     }
   } catch (err) {
     console.error('Project data yuklanmadi:', err);
-    error.value = err.message || 'Xatolik yuz berdi';
     project.value = null;
-  } finally {
-    loading.value = false;
   }
 };
 
@@ -198,6 +147,11 @@ onMounted(() => {
   if (route.params.slug) {
     loadProjectData(route.params.slug);
   }
+
+  // Reload when locale changes
+  watch(currentLocale, () => {
+    if (route.params.slug) loadProjectData(route.params.slug)
+  });
 });
 </script>
 
