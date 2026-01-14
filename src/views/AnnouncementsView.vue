@@ -62,6 +62,7 @@
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useHead } from '@vueuse/head'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
@@ -74,6 +75,18 @@ const router = useRouter();
 const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
+
+useHead({
+  title: 'Ziyoli Avlod - E\'lonlar',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining barcha e\'lonlarini ko\'ring.' },
+    { name: 'keywords', content: 'ziyoli avlod, e\'lonlar, ro\'yxat' },
+    { property: 'og:title', content: 'Ziyoli Avlod - E\'lonlar' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha e\'lonlarini ko\'ring.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 const announcements = ref([]);
 
 const search = ref((route.query.q || '').toString());

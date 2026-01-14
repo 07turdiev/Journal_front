@@ -32,6 +32,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useHead } from '@vueuse/head'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { parseMarkdown } from '@/utils/richTextParser';
@@ -45,6 +46,18 @@ const toggleAccordion = (index) => {
 
 const { t } = useI18n();
 const { loading, error, fetchData, currentLocale } = useApi();
+
+useHead({
+  title: 'Ziyoli Avlod - Jurnal haqida',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnali haqida batafsil ma\'lumotlar. Jurnalning maqsadi, tuzilishi va faoliyati.' },
+    { name: 'keywords', content: 'ziyoli avlod, jurnal haqida, tahririyat, maqsad, faoliyat' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Jurnal haqida' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnali haqida batafsil ma\'lumotlar. Jurnalning maqsadi, tuzilishi va faoliyati.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const loadAboutData = async () => {
   try {
