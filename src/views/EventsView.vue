@@ -56,10 +56,23 @@
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
+
+useMeta({
+  title: 'Ziyoli Avlod - Tadbirlar',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining barcha tadbirlarini ko\'ring.' },
+    { name: 'keywords', content: 'ziyoli avlod, tadbirlar, konferensiyalar' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Tadbirlar' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha tadbirlarini ko\'ring.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const route = useRoute();
 const router = useRouter();

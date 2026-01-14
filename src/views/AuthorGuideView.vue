@@ -32,9 +32,22 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { parseMarkdown } from '@/utils/richTextParser';
+
+useMeta({
+  title: 'Ziyoli Avlod - Mualliflar uchun qo\'llanma',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnaliga maqola yuborish uchun mualliflar uchun qo\'llanma.' },
+    { name: 'keywords', content: 'ziyoli avlod, muallif qo\'llanma, maqola yuborish' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Mualliflar uchun qo\'llanma' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnaliga maqola yuborish uchun mualliflar uchun qo\'llanma.' },
+    { property: 'og:type', content: 'article' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const guideContent = ref(null);
 

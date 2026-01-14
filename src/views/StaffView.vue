@@ -47,9 +47,22 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
+
+useMeta({
+  title: 'Ziyoli Avlod - Tahririyat Xodimlari',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining tahririyat xodimlari haqida ma\'lumotlar.' },
+    { name: 'keywords', content: 'ziyoli avlod, tahririyat xodimlari, jamoa' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Tahririyat Xodimlari' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining tahririyat xodimlari haqida ma\'lumotlar.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const { t } = useI18n();
 const staffMembers = ref([]);

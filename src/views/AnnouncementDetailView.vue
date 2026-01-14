@@ -40,7 +40,6 @@
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useHead } from '@vueuse/head'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
@@ -50,18 +49,6 @@ const { t } = useI18n();
 
 // API integration
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
-
-useHead({
-  title: 'Ziyoli Avlod - E\'lonlar',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining e\'lonlari haqida batafsil ma\'lumotlar.' },
-    { name: 'keywords', content: 'ziyoli avlod, e\'lonlar, yangiliklar' },
-    { property: 'og:title', content: 'Ziyoli Avlod - E\'lonlar' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining e\'lonlari haqida batafsil ma\'lumotlar.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
 
 const announcement = ref(null);
 

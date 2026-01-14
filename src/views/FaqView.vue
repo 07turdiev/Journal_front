@@ -50,9 +50,22 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
+
+useMeta({
+  title: 'Ziyoli Avlod - Tez-tez beriladigan savollar',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnali haqida tez-tez beriladigan savollar va javoblar.' },
+    { name: 'keywords', content: 'ziyoli avlod, FAQ, savollar, javoblar' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Tez-tez beriladigan savollar' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnali haqida tez-tez beriladigan savollar va javoblar.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const route = useRoute();
 const { t } = useI18n();

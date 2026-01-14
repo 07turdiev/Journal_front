@@ -63,10 +63,23 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 import { getPlainText } from '@/utils/richTextParser';
+
+useMeta({
+  title: 'Ziyoli Avlod - Mualliflar',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining barcha mualliflarini ko\'ring.' },
+    { name: 'keywords', content: 'ziyoli avlod, mualliflar, maqola mualliflari' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Mualliflar' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha mualliflarini ko\'ring.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const router = useRouter();
 const { t } = useI18n();

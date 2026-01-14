@@ -138,9 +138,22 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+
+useMeta({
+  title: 'Ziyoli Avlod - Maqolalar',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining barcha maqolalarini ko\'ring.' },
+    { name: 'keywords', content: 'ziyoli avlod, maqolalar, ilmiy maqolalar' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Maqolalar' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha maqolalarini ko\'ring.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();

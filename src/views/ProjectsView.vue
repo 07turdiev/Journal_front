@@ -104,9 +104,22 @@
 import { ref, computed, watch, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+
+useMeta({
+  title: 'Ziyoli Avlod - Loyihalar',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining barcha loyihalarini ko\'ring.' },
+    { name: 'keywords', content: 'ziyoli avlod, loyihalar, tadqiqotlar' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Loyihalar' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha loyihalarini ko\'ring.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();

@@ -59,23 +59,10 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useHead } from '@vueuse/head'
 import PageBanner from '@/components/PageBanner.vue';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
 const { t } = useI18n();
-
-useHead({
-  title: 'Ziyoli Avlod - Arxiv',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining arxiv sonlarini ko\'ring.' },
-    { name: 'keywords', content: 'ziyoli avlod, arxiv, sonlar' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Arxiv' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining arxiv sonlarini ko\'ring.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
 
 const router = useRouter();
 const { getLocalizedPath } = useLocalizedRoute();

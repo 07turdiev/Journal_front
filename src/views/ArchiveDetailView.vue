@@ -95,23 +95,10 @@
 import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useHead } from '@vueuse/head'
 import PageBanner from '@/components/PageBanner.vue';
 
 const { t } = useI18n();
 const route = useRoute();
-
-useHead({
-  title: 'Ziyoli Avlod - Arxiv',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining arxiv maqolalari.' },
-    { name: 'keywords', content: 'ziyoli avlod, arxiv, maqolalar' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Arxiv' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining arxiv maqolalari.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
 const openActionMenu = ref(null);
 
 // O'ZGARTIRILDI: archiveId'ni 'computed'ga o'zgartirdik, bu uni reaktiv qiladi

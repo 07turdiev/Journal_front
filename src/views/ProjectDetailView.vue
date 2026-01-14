@@ -61,10 +61,23 @@
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { parseMarkdown, parseRichText } from '@/utils/richTextParser';
 import DOMPurify from 'dompurify';
+
+useMeta({
+  title: 'Ziyoli Avlod - Loyiha',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining loyihalari haqida batafsil ma\'lumotlar.' },
+    { name: 'keywords', content: 'ziyoli avlod, loyihalar, tadqiqot' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Loyiha' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining loyihalari haqida batafsil ma\'lumotlar.' },
+    { property: 'og:type', content: 'article' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const route = useRoute();
 const { t } = useI18n();

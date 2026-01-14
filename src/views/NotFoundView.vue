@@ -35,7 +35,20 @@
 
 <script setup>
 import { RouterLink } from 'vue-router';
+import { useMeta } from 'vue-meta'
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+
+useMeta({
+  title: 'Ziyoli Avlod - Sahifa topilmadi',
+  meta: [
+    { name: 'description', content: 'Kechirasiz, so\'ralgan sahifa topilmadi.' },
+    { name: 'keywords', content: '404, sahifa topilmadi' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Sahifa topilmadi' },
+    { property: 'og:description', content: 'Kechirasiz, so\'ralgan sahifa topilmadi.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'noindex, nofollow' }
+  ]
+})
 
 const { getLocalizedPath } = useLocalizedRoute();
 </script>

@@ -47,9 +47,22 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
+
+useMeta({
+  title: 'Ziyoli Avlod - Tahrir Hay\'ati',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining tahrir hay\'ati a\'zolari haqida ma\'lumotlar.' },
+    { name: 'keywords', content: 'ziyoli avlod, tahrir hay\'ati, muharrirlar' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Tahrir Hay\'ati' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining tahrir hay\'ati a\'zolari haqida ma\'lumotlar.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const { t } = useI18n();
 

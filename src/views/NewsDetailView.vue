@@ -88,9 +88,22 @@
 import { ref, watch, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
+
+useMeta({
+  title: 'Ziyoli Avlod - Yangilik',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnalining yangiliklari haqida batafsil ma\'lumotlar.' },
+    { name: 'keywords', content: 'ziyoli avlod, yangiliklar, xabarlar' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Yangilik' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnalining yangiliklari haqida batafsil ma\'lumotlar.' },
+    { property: 'og:type', content: 'article' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const route = useRoute();
 const router = useRouter();

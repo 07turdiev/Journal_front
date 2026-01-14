@@ -67,8 +67,21 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useMeta } from 'vue-meta'
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+
+useMeta({
+  title: 'Ziyoli Avlod - Maqola Yuborish',
+  meta: [
+    { name: 'description', content: 'Ziyoli Avlod jurnaliga maqola yuborish uchun yo\'riqnoma va forma.' },
+    { name: 'keywords', content: 'ziyoli avlod, maqola yuborish, nashr etish' },
+    { property: 'og:title', content: 'Ziyoli Avlod - Maqola Yuborish' },
+    { property: 'og:description', content: 'Ziyoli Avlod jurnaliga maqola yuborish uchun yo\'riqnoma va forma.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'robots', content: 'index, follow' }
+  ]
+})
 
 const { t } = useI18n();
 
