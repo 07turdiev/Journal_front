@@ -86,7 +86,6 @@ onMounted(() => {
   setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
   loadAuthorsData();
 });
-const authors = ref([]);
 
 // Breadcrumbs
 const breadcrumbs = computed(() => [

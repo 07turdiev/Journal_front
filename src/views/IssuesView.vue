@@ -157,14 +157,7 @@ onMounted(() => {
   setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
   loadArticlesData();
 });
-    { property: 'og:title', content: 'Ziyoli Avlod - Maqolalar' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha maqolalarini ko\'ring.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
 
-const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 

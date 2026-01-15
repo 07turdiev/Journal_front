@@ -34,23 +34,26 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
-import { useMeta } from 'vue-meta'
+import { useI18n } from 'vue-i18n';
+import { usePageMeta } from '@/composables/usePageMeta';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
-useMeta({
-  title: 'Ziyoli Avlod - Sahifa topilmadi',
-  meta: [
-    { name: 'description', content: 'Kechirasiz, so\'ralgan sahifa topilmadi.' },
-    { name: 'keywords', content: '404, sahifa topilmadi' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Sahifa topilmadi' },
-    { property: 'og:description', content: 'Kechirasiz, so\'ralgan sahifa topilmadi.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'noindex, nofollow' }
-  ]
-})
-
+const route = useRoute();
+const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 const { getLocalizedPath } = useLocalizedRoute();
+
+onMounted(() => {
+  setPageMeta({
+    title: 'Ziyoli Avlod - Sahifa topilmadi',
+    description: 'Kechirasiz, so\'ralgan sahifa topilmadi.',
+    keywords: '404, sahifa topilmadi'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+});
 </script>
 
 <style scoped>

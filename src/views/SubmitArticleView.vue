@@ -88,7 +88,6 @@ onMounted(() => {
   setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
   loadContactData();
 });
-const contactData = ref(null);
 
 const loadContactData = async () => {
   try {
