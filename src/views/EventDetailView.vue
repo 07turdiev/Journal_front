@@ -40,25 +40,14 @@
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
-useMeta({
-  title: 'Ziyoli Avlod - Tadbir',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining tadbirlari haqida batafsil ma\'lumotlar.' },
-    { name: 'keywords', content: 'ziyoli avlod, tadbir, konferensiya' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Tadbir' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining tadbirlari haqida batafsil ma\'lumotlar.' },
-    { property: 'og:type', content: 'event' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
 const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 // API integration
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
@@ -138,6 +127,21 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadEventData(newSlug);
   }
 }, { immediate: false });
+
+// Tadbir ma'lumotlari yuklangandan keyin meta teglarni yangilash
+watch(event, (newEvent) => {
+  if (newEvent) {
+    setPageMeta({
+      title: newEvent.title,
+      description: newEvent.content.substring(0, 160) || 'Ziyoli Avlod jurnalining tadbirlari haqida batafsil ma\'lumotlar.',
+      keywords: `${newEvent.title}, ziyoli avlod, tadbir, konferensiya`,
+      image: newEvent.image,
+      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      type: 'event'
+    });
+    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  }
+});
 
 onMounted(() => {
   if (route.params.slug) {

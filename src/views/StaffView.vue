@@ -47,27 +47,29 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { useRoute } from 'vue-router';
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
-useMeta({
-  title: 'Ziyoli Avlod - Tahririyat Xodimlari',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining tahririyat xodimlari haqida ma\'lumotlar.' },
-    { name: 'keywords', content: 'ziyoli avlod, tahririyat xodimlari, jamoa' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Tahririyat Xodimlari' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining tahririyat xodimlari haqida ma\'lumotlar.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
+const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
+
 const staffMembers = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
+
+onMounted(() => {
+  setPageMeta({
+    title: t('staff.title') || 'Tahririyat Xodimlari',
+    description: t('staff.description') || 'Ziyoli Avlod jurnalining tahririyat xodimlari va ularning mas\'uliyatlari.',
+    keywords: t('staff.keywords') || 'tahririyat xodimlari, jamoa, amaliyotchilar'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadStaffData();
+});
 
 const loadStaffData = async () => {
   try {

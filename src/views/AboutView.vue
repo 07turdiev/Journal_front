@@ -32,19 +32,31 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { parseMarkdown } from '@/utils/richTextParser';
 
 const openIndex = ref(0);
 const aboutContent = ref(null);
+const route = useRoute();
+const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
+const { loading, error, fetchData, currentLocale } = useApi();
+
+onMounted(() => {
+  setPageMeta({
+    title: t('about.title') || 'Jurnal Haqida',
+    description: t('about.description') || 'Ziyoli Avlod ilmiy jurnali haqida, uning missiyasi, maqsadi va ta\'rixi haqida batafsil ma\'lumot.',
+    keywords: t('about.keywords') || 'Ziyoli Avlod, jurnal haqida, ilmiy'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+});
 
 const toggleAccordion = (index) => {
   openIndex.value = openIndex.value === index ? null : index;
 };
-
-const { t } = useI18n();
-const { loading, error, fetchData, currentLocale } = useApi();
 
 const loadAboutData = async () => {
   try {

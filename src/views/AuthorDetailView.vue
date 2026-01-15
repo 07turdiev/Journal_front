@@ -55,25 +55,14 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
-useMeta({
-  title: 'Ziyoli Avlod - Muallif',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining mualliflari haqida batafsil ma\'lumotlar.' },
-    { name: 'keywords', content: 'ziyoli avlod, muallif, maqola muallifi' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Muallif' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining mualliflari haqida batafsil ma\'lumotlar.' },
-    { property: 'og:type', content: 'profile' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
 const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
@@ -141,6 +130,20 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadAuthorData(newSlug);
   }
 }, { immediate: false });
+
+// Muallif ma'lumotlari yuklangandan keyin meta teglarni yangilash
+watch(author, (newAuthor) => {
+  if (newAuthor) {
+    setPageMeta({
+      title: newAuthor.name,
+      description: `${newAuthor.name} - Ziyoli Avlod jurnalidagi muallif. ${newAuthor.publications?.length || 0} ta nashr.`,
+      keywords: `${newAuthor.name}, muallif, ziyoli avlod, maqola muallifi`,
+      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      type: 'profile'
+    });
+    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  }
+});
 
 onMounted(() => {
   if (route.params.slug) {

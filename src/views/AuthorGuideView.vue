@@ -32,27 +32,29 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { useRoute } from 'vue-router';
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { parseMarkdown } from '@/utils/richTextParser';
 
-useMeta({
-  title: 'Ziyoli Avlod - Mualliflar uchun qo\'llanma',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnaliga maqola yuborish uchun mualliflar uchun qo\'llanma.' },
-    { name: 'keywords', content: 'ziyoli avlod, muallif qo\'llanma, maqola yuborish' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Mualliflar uchun qo\'llanma' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnaliga maqola yuborish uchun mualliflar uchun qo\'llanma.' },
-    { property: 'og:type', content: 'article' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
+const route = useRoute();
+const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 const guideContent = ref(null);
 
-const { t } = useI18n();
 const { loading, error, fetchData, currentLocale } = useApi();
+
+onMounted(() => {
+  setPageMeta({
+    title: t('author_guide.title') || 'Mualliflar Uchun Qo\'llanma',
+    description: t('author_guide.description') || 'Ziyoli Avlod jurnalida maqola nashr ettirishni istagan mualliflar uchun qo\'llanma va ko\'rsatmalar.',
+    keywords: t('author_guide.keywords') || 'muallif qo\'llanma, maqola yuborish, standartlar'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadGuideData();
+});
 
 const loadGuideData = async () => {
   try {

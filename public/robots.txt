@@ -1,0 +1,59 @@
+# Sitemap
+Sitemap: https://ziyoliavlod.uz/sitemap.xml
+
+# Allow all robots
+User-agent: *
+Allow: /
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /admin-panel/
+Disallow: /private/
+Disallow: /temp/
+
+# Crawl delay
+Crawl-delay: 1
+
+# Request rate
+Request-rate: 30/60
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific rules for Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Allowed resources
+User-agent: *
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.otf$
+Allow: /*.eot$

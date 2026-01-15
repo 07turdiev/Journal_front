@@ -27,26 +27,28 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { useRoute } from 'vue-router';
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 
-useMeta({
-  title: 'Ziyoli Avlod - Hamkorlar',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining hamkor tashkilotlari haqida ma\'lumotlar.' },
-    { name: 'keywords', content: 'ziyoli avlod, hamkorlar, tashkilotlar' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Hamkorlar' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining hamkor tashkilotlari haqida ma\'lumotlar.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
+const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
+
 const partners = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
+
+onMounted(() => {
+  setPageMeta({
+    title: t('partners.title') || 'Hamkorlar',
+    description: t('partners.description') || 'Ziyoli Avlod jurnalining hamkor tashkilotlar va universitetlari.',
+    keywords: t('partners.keywords') || 'hamkorlar, tashkilotlar, universitetlar'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadPartnersData();
+});
 
 const loadPartnersData = async () => {
   try {

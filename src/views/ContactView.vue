@@ -180,25 +180,27 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
-import { useMeta } from 'vue-meta'
+import { RouterLink, useRoute } from 'vue-router';
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { ref, computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
-useMeta({
-  title: 'Ziyoli Avlod - Aloqa',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnali bilan bog\'lanish uchun kontakt ma\'lumotlari.' },
-    { name: 'keywords', content: 'ziyoli avlod, aloqa, kontakt' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Aloqa' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnali bilan bog\'lanish uchun kontakt ma\'lumotlari.' },
-    { property: 'og:type', content: 'contact' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
+const route = useRoute();
+const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
+
+onMounted(() => {
+  setPageMeta({
+    title: t('contact.title') || 'Aloqa',
+    description: t('contact.description') || 'Ziyoli Avlod jurnali bilan aloqa qilish. Email, telefon va ijtimoiy tarmoq havolalari.',
+    keywords: t('contact.keywords') || 'aloqa, kontakt, email, telefon'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadContactData();
+});
 
 const phone = ref('');
 const PHONE_REGEX = /^\+998\s\d{2}\s\d{3}\s\d{4}$/;

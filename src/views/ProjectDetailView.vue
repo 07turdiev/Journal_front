@@ -61,26 +61,15 @@
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { parseMarkdown, parseRichText } from '@/utils/richTextParser';
 import DOMPurify from 'dompurify';
 
-useMeta({
-  title: 'Ziyoli Avlod - Loyiha',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining loyihalari haqida batafsil ma\'lumotlar.' },
-    { name: 'keywords', content: 'ziyoli avlod, loyihalar, tadqiqot' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Loyiha' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining loyihalari haqida batafsil ma\'lumotlar.' },
-    { property: 'og:type', content: 'article' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
 const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const project = ref(null);
@@ -155,6 +144,21 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadProjectData(newSlug);
   }
 }, { immediate: false });
+
+// Loyiha ma'lumotlari yuklangandan keyin meta teglarni yangilash
+watch(project, (newProject) => {
+  if (newProject) {
+    setPageMeta({
+      title: newProject.title,
+      description: newProject.description || newProject.title,
+      keywords: `${newProject.title}, ziyoli avlod, loyiha, tadqiqot`,
+      image: newProject.image,
+      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      type: 'article'
+    });
+    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  }
+});
 
 onMounted(() => {
   if (route.params.slug) {

@@ -69,32 +69,31 @@
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
-useMeta({
-  title: 'Ziyoli Avlod - Yangiliklar',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining barcha yangiliklarini ko\'ring.' },
-    { name: 'keywords', content: 'ziyoli avlod, yangiliklar, xabarlar' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Yangiliklar' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha yangiliklarini ko\'ring.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 // API integration
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const allNews = ref([]);
+
+onMounted(() => {
+  setPageMeta({
+    title: t('news.title') || 'Yangiliklar',
+    description: t('news.description') || 'Ziyoli Avlod jurnalining oxirgi yangiliklar va e\'lonlari. Akademik dunyodagi eng muhim voqealarni kuzatib turing.',
+    keywords: t('news.keywords') || 'yangiliklar, xabarlar, e\'lonlar'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadNewsData();
+});
 
 // UI state synced with route query
 const search = ref((route.query.q || '').toString());

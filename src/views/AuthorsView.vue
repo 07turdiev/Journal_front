@@ -61,30 +61,31 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 import { getPlainText } from '@/utils/richTextParser';
 
-useMeta({
-  title: 'Ziyoli Avlod - Mualliflar',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining barcha mualliflarini ko\'ring.' },
-    { name: 'keywords', content: 'ziyoli avlod, mualliflar, maqola mualliflari' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Mualliflar' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha mualliflarini ko\'ring.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
 const router = useRouter();
+const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
+const authors = ref([]);
+
+onMounted(() => {
+  setPageMeta({
+    title: t('authors.title') || 'Mualliflar',
+    description: t('authors.description') || 'Ziyoli Avlod jurnalida nashr ettirilgan mualliflar ro\'yxati. Mualliflar haqida ma\'lumot va ularning nashriyotlarini ko\'ring.',
+    keywords: t('authors.keywords') || 'mualliflar, ma\'qolalar mualliflari, yozuvchilar'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadAuthorsData();
+});
 const authors = ref([]);
 
 // Breadcrumbs

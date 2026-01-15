@@ -130,25 +130,14 @@
 import { ref, computed, onMounted, onUnmounted, watch, shallowRef } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
-useMeta({
-  title: 'Ziyoli Avlod - Maqola',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalidagi maqola haqida batafsil ma\'lumotlar.' },
-    { name: 'keywords', content: 'ziyoli avlod, maqola, ilmiy maqola' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Maqola' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalidagi maqola haqida batafsil ma\'lumotlar.' },
-    { property: 'og:type', content: 'article' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
 const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
@@ -296,6 +285,24 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadArticleData();
   }
 }, { immediate: false });
+
+// Maqola ma'lumotlari yuklangandan keyin meta teglarni yangilash
+watch(article, (newArticle) => {
+  if (newArticle) {
+    setPageMeta({
+      title: newArticle.Mavzu,
+      description: newArticle.abstract || newArticle.Mavzu.substring(0, 160),
+      keywords: `${newArticle.Mavzu}, ziyoli avlod, ilmiy maqola, ${newArticle.keywords || ''}`,
+      image: newArticle.image,
+      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      type: 'article',
+      author: newArticle.author?.name || 'Ziyoli Avlod',
+      datePublished: newArticle.date,
+      dateModified: newArticle.date
+    });
+    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  }
+});
 
 onMounted(() => {
   if (route.params.slug) {

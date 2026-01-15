@@ -47,28 +47,29 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { useRoute } from 'vue-router';
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
-useMeta({
-  title: 'Ziyoli Avlod - Tahrir Hay\'ati',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining tahrir hay\'ati a\'zolari haqida ma\'lumotlar.' },
-    { name: 'keywords', content: 'ziyoli avlod, tahrir hay\'ati, muharrirlar' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Tahrir Hay\'ati' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnalining tahrir hay\'ati a\'zolari haqida ma\'lumotlar.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
+const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 const boardMembers = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
+
+onMounted(() => {
+  setPageMeta({
+    title: t('editorial_board.title') || 'Tahrir Hay\'ati',
+    description: t('editorial_board.description') || 'Ziyoli Avlod jurnalining tahrir hay\'ati a\'zolari va ularning professional faoliyati.',
+    keywords: t('editorial_board.keywords') || 'tahrir hay\'ati, muharrirlar, a\'zolar'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadEditorialBoardData();
+});
 
 const loadEditorialBoardData = async () => {
   try {

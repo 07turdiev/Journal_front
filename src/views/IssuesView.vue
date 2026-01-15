@@ -137,17 +137,26 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
-import { useMeta } from 'vue-meta'
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
-useMeta({
-  title: 'Ziyoli Avlod - Maqolalar',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnalining barcha maqolalarini ko\'ring.' },
-    { name: 'keywords', content: 'ziyoli avlod, maqolalar, ilmiy maqolalar' },
+const route = useRoute();
+const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
+
+onMounted(() => {
+  setPageMeta({
+    title: t('issues.title') || 'Maqolalar',
+    description: t('issues.description') || 'Ziyoli Avlod jurnalining barcha nashriyotlari, maqolalari va tadqiqotlari. Qidiruv va filtrlash orqali kerakli maqolani toping.',
+    keywords: t('issues.keywords') || 'maqolalar, nashriyotlar, tadqiqot'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadArticlesData();
+});
     { property: 'og:title', content: 'Ziyoli Avlod - Maqolalar' },
     { property: 'og:description', content: 'Ziyoli Avlod jurnalining barcha maqolalarini ko\'ring.' },
     { property: 'og:type', content: 'website' },

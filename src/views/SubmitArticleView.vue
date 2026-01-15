@@ -67,25 +67,27 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useMeta } from 'vue-meta'
+import { useRoute } from 'vue-router';
+import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 
-useMeta({
-  title: 'Ziyoli Avlod - Maqola Yuborish',
-  meta: [
-    { name: 'description', content: 'Ziyoli Avlod jurnaliga maqola yuborish uchun yo\'riqnoma va forma.' },
-    { name: 'keywords', content: 'ziyoli avlod, maqola yuborish, nashr etish' },
-    { property: 'og:title', content: 'Ziyoli Avlod - Maqola Yuborish' },
-    { property: 'og:description', content: 'Ziyoli Avlod jurnaliga maqola yuborish uchun yo\'riqnoma va forma.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' }
-  ]
-})
-
+const route = useRoute();
 const { t } = useI18n();
+const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
+const contactData = ref(null);
+
+onMounted(() => {
+  setPageMeta({
+    title: t('submit_article.title') || 'Maqola Yuborish',
+    description: t('submit_article.description') || 'Ziyoli Avlod jurnalida o\'z maqolangizni yuborish. To\'liq forma va kerakli hujjatlar uchun qo\'llanma.',
+    keywords: t('submit_article.keywords') || 'maqola yuborish, nashr etish, ilmiy maqola'
+  });
+  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  loadContactData();
+});
 const contactData = ref(null);
 
 const loadContactData = async () => {
