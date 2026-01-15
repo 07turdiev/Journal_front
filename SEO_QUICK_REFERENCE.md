@@ -61,7 +61,7 @@ onMounted(() => {
     description: 'Page description...',
     keywords: 'keyword1, keyword2, keyword3'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadData(); // Your existing load function
 });
 ```
@@ -80,13 +80,13 @@ watch(dataRef, (newData) => {
       description: newData.description || 'Default description',
       keywords: `${newData.title}, ziyoli avlod, keyword3`,
       image: newData.image,              // API image URL
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article',                   // or 'event', 'profile', etc.
       author: newData.author?.name,
       datePublished: newData.date,
       dateModified: newData.date
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 ```
@@ -119,7 +119,7 @@ watch(dataRef, (newData) => {
 <meta property="og:title" content="Page Title">
 <meta property="og:description" content="Page description...">
 <meta property="og:image" content="https://api.example.com/image.jpg">
-<meta property="og:url" content="https://ziyoliavlod.uz/page">
+<meta property="og:url" content="https://ziyoliavlod.com/page">
 <meta property="og:locale" content="uz_UZ">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:locale:alternate" content="ru_RU">
@@ -137,7 +137,7 @@ watch(dataRef, (newData) => {
 </script>
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://ziyoliavlod.uz/page">
+<link rel="canonical" href="https://ziyoliavlod.com/page">
 ```
 
 ---

@@ -136,10 +136,10 @@ watch(announcement, (newAnnouncement) => {
       description: newAnnouncement.content.substring(0, 160) || 'Ziyoli Avlod jurnalining e\'lonlari',
       keywords: `${newAnnouncement.title}, ziyoli avlod, e'lon, xabar`,
       image: newAnnouncement.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article'
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 

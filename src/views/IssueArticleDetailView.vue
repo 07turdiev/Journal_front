@@ -294,13 +294,13 @@ watch(article, (newArticle) => {
       description: newArticle.abstract || newArticle.Mavzu.substring(0, 160),
       keywords: `${newArticle.Mavzu}, ziyoli avlod, ilmiy maqola, ${newArticle.keywords || ''}`,
       image: newArticle.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article',
       author: newArticle.author?.name || 'Ziyoli Avlod',
       datePublished: newArticle.date,
       dateModified: newArticle.date
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 

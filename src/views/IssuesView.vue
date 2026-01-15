@@ -154,7 +154,7 @@ onMounted(() => {
     description: t('issues.description') || 'Ziyoli Avlod jurnalining barcha nashriyotlari, maqolalari va tadqiqotlari. Qidiruv va filtrlash orqali kerakli maqolani toping.',
     keywords: t('issues.keywords') || 'maqolalar, nashriyotlar, tadqiqot'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadArticlesData();
 });
 

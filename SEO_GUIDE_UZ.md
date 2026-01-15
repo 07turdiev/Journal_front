@@ -89,23 +89,23 @@ Quyidagi optimizatsiyalar:
 2. **Domain qo'shish (2 usuli):**
 
    **Usul 1: Domain Property (Tavsiya etiladi)**
-   - `https://ziyoliavlod.uz` kiriting
+   - `https://ziyoliavlod.com` kiriting
    - DNS TXT record orqali tekshiruv
    - Hosting provayderiga kirish
    - DNS sozlamalari qo'shing
 
    **Usul 2: URL Prefix Property**
-   - `https://ziyoliavlod.uz/` kiriting
+   - `https://ziyoliavlod.com/` kiriting
    - HTML file, meta tag yoki Google Analytics orqali tekshiruv
 
 ### 4.2 Sitemap'ni Qo'shish
 
 1. Search Console'da `Sitemaps` bo'limiga o'ting
-2. `https://ziyoliavlod.uz/sitemap.xml` qo'shish
+2. `https://ziyoliavlod.com/sitemap.xml` qo'shish
 3. Google avtomatik ravishda indexlashni boshlaydi
 
 ### 4.3 Robots.txt Kiritish
-- `https://ziyoliavlod.uz/robots.txt` mavjud
+- `https://ziyoliavlod.com/robots.txt` mavjud
 - Google avtomatik ravishda topadi
 
 ---
@@ -124,7 +124,7 @@ Quyidagi optimizatsiyalar:
 ### 5.2 Sitemap'ni Qo'shish
 
 1. Webmaster Tools'da Sitemap bo'limiga o'ting
-2. `https://ziyoliavlod.uz/sitemap.xml` qo'shish
+2. `https://ziyoliavlod.com/sitemap.xml` qo'shish
 
 ---
 
@@ -142,7 +142,7 @@ Quyidagi optimizatsiyalar:
 ### 6.2 Sitemap Qo'shish
 
 1. Turli til versiyalari uchun:
-   - `https://ziyoliavlod.uz/sitemap.xml`
+   - `https://ziyoliavlod.com/sitemap.xml`
    - Meta tag'da `alternate` linklarini ko'rsating
 
 ---
@@ -159,10 +159,10 @@ Saytimiz 3 tilda:
 Har bir sahifa uchun hreflang tags o'rnatilgan:
 
 ```html
-<link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/" />
-<link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/" />
-<link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/" />
-<link rel="alternate" hreflang="x-default" href="https://ziyoliavlod.uz/" />
+<link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/" />
+<link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/" />
+<link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/" />
+<link rel="alternate" hreflang="x-default" href="https://ziyoliavlod.com/" />
 ```
 
 Google va Yandex bu taglarni ishlatib:
@@ -285,7 +285,7 @@ Preferensiya:
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Ziyoli Avlod",
-  "url": "https://ziyoliavlod.uz",
+  "url": "https://ziyoliavlod.com",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "UZ",
@@ -294,7 +294,7 @@ Preferensiya:
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "Editorial",
-    "email": "editor@ziyoliavlod.uz"
+    "email": "editor@ziyoliavlod.com"
   }
 }
 ```

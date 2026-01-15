@@ -136,10 +136,10 @@ watch(event, (newEvent) => {
       description: newEvent.content.substring(0, 160) || 'Ziyoli Avlod jurnalining tadbirlari haqida batafsil ma\'lumotlar.',
       keywords: `${newEvent.title}, ziyoli avlod, tadbir, konferensiya`,
       image: newEvent.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'event'
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 

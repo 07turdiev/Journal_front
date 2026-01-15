@@ -91,7 +91,7 @@ onMounted(() => {
     description: t('news.description') || 'Ziyoli Avlod jurnalining oxirgi yangiliklar va e\'lonlari. Akademik dunyodagi eng muhim voqealarni kuzatib turing.',
     keywords: t('news.keywords') || 'yangiliklar, xabarlar, e\'lonlar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadNewsData();
 });
 

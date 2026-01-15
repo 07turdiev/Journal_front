@@ -67,7 +67,7 @@ onMounted(() => {
     description: t('staff.description') || 'Ziyoli Avlod jurnalining tahririyat xodimlari va ularning mas\'uliyatlari.',
     keywords: t('staff.keywords') || 'tahririyat xodimlari, jamoa, amaliyotchilar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadStaffData();
 });
 

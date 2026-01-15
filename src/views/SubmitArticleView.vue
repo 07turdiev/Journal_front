@@ -85,7 +85,7 @@ onMounted(() => {
     description: t('submit_article.description') || 'Ziyoli Avlod jurnalida o\'z maqolangizni yuborish. To\'liq forma va kerakli hujjatlar uchun qo\'llanma.',
     keywords: t('submit_article.keywords') || 'maqola yuborish, nashr etish, ilmiy maqola'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadContactData();
 });
 

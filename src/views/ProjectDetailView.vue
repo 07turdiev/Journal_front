@@ -153,10 +153,10 @@ watch(project, (newProject) => {
       description: newProject.description || newProject.title,
       keywords: `${newProject.title}, ziyoli avlod, loyiha, tadqiqot`,
       image: newProject.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article'
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 

@@ -67,7 +67,7 @@ onMounted(() => {
     description: t('editorial_board.description') || 'Ziyoli Avlod jurnalining tahrir hay\'ati a\'zolari va ularning professional faoliyati.',
     keywords: t('editorial_board.keywords') || 'tahrir hay\'ati, muharrirlar, a\'zolar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadEditorialBoardData();
 });
 

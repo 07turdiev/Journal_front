@@ -7,7 +7,7 @@ export const seoConfig = {
     title: 'Ziyoli Avlod - O\'zbekiston Ilmiy Jurnali',
     description: 'Ziyoli Avlod - O\'zbekiston ilmiy jurnali. Akademik maqolalar, tadqiqot, yangiliklar va tadbirlar.',
     keywords: 'jurnal, ilmiy, akademik, O\'zbekiston, tadqiqot, maqola',
-    image: 'https://ziyoliavlod.uz/og-image.jpg'
+    image: 'https://ziyoliavlod.com/og-image.jpg'
   },
 
   pages: {
@@ -215,6 +215,6 @@ export function getPageSEO(locale = 'uz', pageName = 'home') {
     description: pageConfig.description || seoConfig.default.description,
     keywords: pageConfig.keywords || seoConfig.default.keywords,
     image: pageConfig.image || seoConfig.default.image,
-    url: `https://ziyoliavlod.uz/${locale}/${pageName === 'home' ? '' : pageName}`
+    url: `https://ziyoliavlod.com/${locale}/${pageName === 'home' ? '' : pageName}`
   };
 }

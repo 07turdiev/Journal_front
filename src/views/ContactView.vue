@@ -198,7 +198,7 @@ onMounted(() => {
     description: t('contact.description') || 'Ziyoli Avlod jurnali bilan aloqa qilish. Email, telefon va ijtimoiy tarmoq havolalari.',
     keywords: t('contact.keywords') || 'aloqa, kontakt, email, telefon'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadContactData();
 });
 

@@ -124,7 +124,7 @@ onMounted(() => {
     description: t('projects.description') || 'Ziyoli Avlod jurnali tomonidan amalga oshiriladigan ilmiy loyihalar va dasturlar.',
     keywords: t('projects.keywords') || 'loyihalar, tadqiqotlar, ilmiy loyihalar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadProjectsData();
 });
 

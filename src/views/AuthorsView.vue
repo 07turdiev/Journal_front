@@ -83,7 +83,7 @@ onMounted(() => {
     description: t('authors.description') || 'Ziyoli Avlod jurnalida nashr ettirilgan mualliflar ro\'yxati. Mualliflar haqida ma\'lumot va ularning nashriyotlarini ko\'ring.',
     keywords: t('authors.keywords') || 'mualliflar, ma\'qolalar mualliflari, yozuvchilar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadAuthorsData();
 });
 

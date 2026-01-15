@@ -163,7 +163,7 @@ onMounted(() => {
     description: 'Dynamic description',
     keywords: 'key1, key2, key3'
   })
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`)
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`)
   loadData()
 })
 ```
@@ -198,12 +198,12 @@ watch(article, (newArticle) => {
       description: newArticle.abstract,     // Dynamic description
       keywords: `${newArticle.Mavzu}, ...`, // Dynamic keywords
       image: newArticle.image,               // ⭐ API image
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article',
       author: newArticle.author?.name,
       datePublished: newArticle.date
     })
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`)
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`)
   }
 })
 
@@ -312,7 +312,7 @@ AuthorDetailView.vue
 │  in modern scientific research..."   │
 │ (og:description)                     │
 ├──────────────────────────────────────┤
-│ ziyoliavlod.uz › ... › article-slug  │
+│ ziyoliavlod.com › ... › article-slug  │
 │ (og:url)                             │
 └──────────────────────────────────────┘
 ```

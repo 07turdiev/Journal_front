@@ -52,7 +52,7 @@ onMounted(() => {
     description: 'Kechirasiz, so\'ralgan sahifa topilmadi.',
     keywords: '404, sahifa topilmadi'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
 });
 </script>
 

@@ -51,7 +51,7 @@ onMounted(() => {
     description: t('about.description') || 'Ziyoli Avlod ilmiy jurnali haqida, uning missiyasi, maqsadi va ta\'rixi haqida batafsil ma\'lumot.',
     keywords: t('about.keywords') || 'Ziyoli Avlod, jurnal haqida, ilmiy'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
 });
 
 const toggleAccordion = (index) => {

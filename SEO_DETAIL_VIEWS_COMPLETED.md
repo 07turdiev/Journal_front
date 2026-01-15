@@ -33,13 +33,13 @@ watch(article, (newArticle) => {
       description: newArticle.intro || newArticle.content.substring(0, 160),
       keywords: `${newArticle.title}, ziyoli avlod, yangiliklar`,
       image: newArticle.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article',
       author: 'Ziyoli Avlod',
       datePublished: newArticle.date,
       dateModified: newArticle.date
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 ```
@@ -64,10 +64,10 @@ watch(event, (newEvent) => {
       description: newEvent.content.substring(0, 160) || 'Ziyoli Avlod jurnalining tadbirlari haqida batafsil ma\'lumotlar.',
       keywords: `${newEvent.title}, ziyoli avlod, tadbir, konferensiya`,
       image: newEvent.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'event'
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 ```
@@ -94,13 +94,13 @@ watch(article, (newArticle) => {
       description: newArticle.abstract || newArticle.Mavzu.substring(0, 160),
       keywords: `${newArticle.Mavzu}, ziyoli avlod, ilmiy maqola, ${newArticle.keywords || ''}`,
       image: newArticle.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article',
       author: newArticle.author?.name || 'Ziyoli Avlod',
       datePublished: newArticle.date,
       dateModified: newArticle.date
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 ```
@@ -123,10 +123,10 @@ watch(author, (newAuthor) => {
       title: newAuthor.name,
       description: `${newAuthor.name} - Ziyoli Avlod jurnalidagi muallif. ${newAuthor.publications?.length || 0} ta nashr.`,
       keywords: `${newAuthor.name}, muallif, ziyoli avlod, maqola muallifi`,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'profile'
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 ```
@@ -151,10 +151,10 @@ watch(project, (newProject) => {
       description: newProject.description || newProject.title,
       keywords: `${newProject.title}, ziyoli avlod, loyiha, tadqiqot`,
       image: newProject.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article'
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 ```
@@ -179,10 +179,10 @@ watch(announcement, (newAnnouncement) => {
       description: newAnnouncement.content.substring(0, 160) || 'Ziyoli Avlod jurnalining e\'lonlari',
       keywords: `${newAnnouncement.title}, ziyoli avlod, e'lon, xabar`,
       image: newAnnouncement.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article'
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 ```

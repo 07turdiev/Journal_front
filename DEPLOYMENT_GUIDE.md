@@ -122,7 +122,7 @@ document.querySelector('meta[name="description"]').content
 
 // 2. Check canonical
 document.querySelector('link[rel="canonical"]')
-// Natija: href="https://ziyoliavlod.uz/"
+// Natija: href="https://ziyoliavlod.com/"
 
 // 3. Check sitemap
 fetch('/sitemap.xml').then(r => r.text()).then(console.log)
@@ -148,7 +148,7 @@ fetch('/sitemap.xml').then(r => r.text()).then(console.log)
 
 ```
 1. https://search.google.com/search-console → "Start now"
-2. "Add property" → "https://ziyoliavlod.uz"
+2. "Add property" → "https://ziyoliavlod.com"
 3. Tekshiruv usulini tanlash:
    - DNS TXT record (tavsiya etiladi)
    - HTML file
@@ -162,7 +162,7 @@ fetch('/sitemap.xml').then(r => r.text()).then(console.log)
 ```
 1. Left sidebar: "Sitemaps"
 2. "Add a new sitemap"
-3. "https://ziyoliavlod.uz/sitemap.xml" kiriting
+3. "https://ziyoliavlod.com/sitemap.xml" kiriting
 4. Submit
 5. Status: SUCCESS/QUEUED (1-48 soat)
 ```
@@ -180,7 +180,7 @@ fetch('/sitemap.xml').then(r => r.text()).then(console.log)
 
 ```
 1. Tools: "Mobile-Friendly Test"
-2. "https://ziyoliavlod.uz" kiriting
+2. "https://ziyoliavlod.com" kiriting
 3. Expectation: ✅ Mobile friendly
 ```
 
@@ -188,7 +188,7 @@ fetch('/sitemap.xml').then(r => r.text()).then(console.log)
 
 ```
 1. Tools: "Rich Results Test"
-2. "https://ziyoliavlod.uz" kiriting
+2. "https://ziyoliavlod.com" kiriting
 3. Expectation: Organization schema validated
 ```
 
@@ -200,7 +200,7 @@ fetch('/sitemap.xml').then(r => r.text()).then(console.log)
 
 ```
 1. https://www.bing.com/webmasters/
-2. "Add a site" → "https://ziyoliavlod.uz"
+2. "Add a site" → "https://ziyoliavlod.com"
 3. Tekshiruv:
    - Option 1: XML sitemap (FAST)
    - Option 2: Meta tag
@@ -211,7 +211,7 @@ fetch('/sitemap.xml').then(r => r.text()).then(console.log)
 
 ```
 1. "Sitemaps" → "Submit sitemap"
-2. "https://ziyoliavlod.uz/sitemap.xml"
+2. "https://ziyoliavlod.com/sitemap.xml"
 3. Click "Submit"
 ```
 
@@ -232,7 +232,7 @@ fetch('/sitemap.xml').then(r => r.text()).then(console.log)
 ```
 1. "Crawling" → "Sitemaps"
 2. "Add sitemap"
-3. "https://ziyoliavlod.uz/sitemap.xml"
+3. "https://ziyoliavlod.com/sitemap.xml"
 ```
 
 ---
@@ -284,8 +284,8 @@ Deploy oldingi tekshiruv:
 
 - [ ] Barcha meta tags ko'rsatilayotgan
 - [ ] Canonical URL to'g'ri
-- [ ] Sitemap.xml accessibility: `https://ziyoliavlod.uz/sitemap.xml`
-- [ ] robots.txt accessibility: `https://ziyoliavlod.uz/robots.txt`
+- [ ] Sitemap.xml accessibility: `https://ziyoliavlod.com/sitemap.xml`
+- [ ] robots.txt accessibility: `https://ziyoliavlod.com/robots.txt`
 - [ ] HTTPS enabled (obligatoryly)
 - [ ] Mobile responsive
 - [ ] .htaccess rules working
@@ -351,7 +351,7 @@ Har 2-4 haftada:
 ### Issue: Sitemap not showing in Search Console
 
 **Solution:**
-1. Tekshirish: `https://ziyoliavlod.uz/sitemap.xml` accessible
+1. Tekshirish: `https://ziyoliavlod.com/sitemap.xml` accessible
 2. Format XML'ni validate: https://validator.w3.org/
 3. Re-submit sitemap in Search Console
 4. 24-48 soat kutish
@@ -359,7 +359,7 @@ Har 2-4 haftada:
 ### Issue: robots.txt Errors
 
 **Solution:**
-1. Tekshirish: `https://ziyoliavlod.uz/robots.txt` accessible
+1. Tekshirish: `https://ziyoliavlod.com/robots.txt` accessible
 2. Syntax checker: https://tools.webconfs.com/robots-txt-parser.php
 3. Disallow paths correct bo'lishi
 4. Deploy va re-check

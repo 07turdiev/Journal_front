@@ -52,7 +52,7 @@ onMounted(() => {
     description: t('author_guide.description') || 'Ziyoli Avlod jurnalida maqola nashr ettirishni istagan mualliflar uchun qo\'llanma va ko\'rsatmalar.',
     keywords: t('author_guide.keywords') || 'muallif qo\'llanma, maqola yuborish, standartlar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadGuideData();
 });
 

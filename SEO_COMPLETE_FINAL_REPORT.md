@@ -112,9 +112,9 @@
 </script>
 
 <!-- Hreflang -->
-<link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/...">
-<link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/...">
-<link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/...">
+<link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/...">
+<link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/...">
+<link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/...">
 ```
 
 ### Dynamic Tags (usePageMeta Composable)
@@ -124,7 +124,7 @@ setPageMeta({
   description: "Article description...",
   keywords: "key1, key2, key3",
   image: "https://api.example.com/image.jpg",
-  url: "https://ziyoliavlod.uz/path",
+  url: "https://ziyoliavlod.com/path",
   type: "article",  // or "profile", "event", etc.
   author: "Author Name",
   datePublished: "2024-01-01",
@@ -192,7 +192,7 @@ index.html                        # ✅ Global meta tags
 [Image Preview] 
 Article Title | og:title
 "Article description text..." | og:description
-ziyoliavlod.uz | og:url
+ziyoliavlod.com | og:url
 ```
 
 ---
@@ -320,7 +320,7 @@ onMounted(() => {
     description: 'Page description...',
     keywords: 'key1, key2, key3'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
 });
 ```
 
@@ -338,13 +338,13 @@ watch(dataRef, (newData) => {
       description: newData.description,
       keywords: 'key1, key2, key3',
       image: newData.image,  // API image URL
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article',
       author: newData.author,
       datePublished: newData.date,
       dateModified: newData.date
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 ```

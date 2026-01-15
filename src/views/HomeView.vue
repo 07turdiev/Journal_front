@@ -24,10 +24,10 @@ onMounted(() => {
     title: t('home.title') || 'Ziyoli Avlod',
     description: t('home.description') || 'Ziyoli Avlod - O\'zbekiston ilmiy jurnali. Akademik maqolalar, tadqiqot, yangiliklar va tadbirlar.',
     keywords: t('home.keywords') || 'Ziyoli Avlod, jurnal, ilmiy, akademik, O\'zbekiston',
-    image: 'https://ziyoliavlod.uz/og_default.jpg',
-    url: 'https://ziyoliavlod.uz/'
+    image: 'https://ziyoliavlod.com/og_default.jpg',
+    url: 'https://ziyoliavlod.com/'
   });
-  setCanonical('https://ziyoliavlod.uz/');
+  setCanonical('https://ziyoliavlod.com/');
 });
 </script>
 

@@ -46,7 +46,7 @@ onMounted(() => {
     description: t('partners.description') || 'Ziyoli Avlod jurnalining hamkor tashkilotlar va universitetlari.',
     keywords: t('partners.keywords') || 'hamkorlar, tashkilotlar, universitetlar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadPartnersData();
 });
 

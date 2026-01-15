@@ -87,7 +87,7 @@ onMounted(() => {
     description: t('announcements.description') || 'Ziyoli Avlod jurnalining rasmiy e\'lonlari va muhim xabarlar.',
     keywords: t('announcements.keywords') || 'e\'lonlar, xabarlar, bildirish'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadAnnouncementsData();
 });
 

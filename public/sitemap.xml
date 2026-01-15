@@ -8,423 +8,423 @@
 
   <!-- HOME PAGES - All Languages -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/</loc>
+    <loc>https://ziyoliavlod.com/uz/</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ziyoliavlod.uz/uz/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ziyoliavlod.com/uz/" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/</loc>
+    <loc>https://ziyoliavlod.com/en/</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/</loc>
+    <loc>https://ziyoliavlod.com/ru/</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/" />
   </url>
 
   <!-- ABOUT SECTION -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/about</loc>
+    <loc>https://ziyoliavlod.com/uz/about</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/about" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/about" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/about</loc>
+    <loc>https://ziyoliavlod.com/en/about</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/about" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/about" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/about" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/about" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/about</loc>
+    <loc>https://ziyoliavlod.com/ru/about</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/about" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/about" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/about" />
   </url>
 
   <!-- EDITORIAL BOARD -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/editorial-board</loc>
+    <loc>https://ziyoliavlod.com/uz/editorial-board</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/editorial-board" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/editorial-board" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/editorial-board" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/editorial-board" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/editorial-board</loc>
+    <loc>https://ziyoliavlod.com/en/editorial-board</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/editorial-board" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/editorial-board" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/editorial-board" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/editorial-board" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/editorial-board</loc>
+    <loc>https://ziyoliavlod.com/ru/editorial-board</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/editorial-board" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/editorial-board" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/editorial-board" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/editorial-board" />
   </url>
 
   <!-- STAFF -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/staff</loc>
+    <loc>https://ziyoliavlod.com/uz/staff</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/staff" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/staff" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/staff" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/staff" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/staff</loc>
+    <loc>https://ziyoliavlod.com/en/staff</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/staff" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/staff" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/staff" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/staff" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/staff</loc>
+    <loc>https://ziyoliavlod.com/ru/staff</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/staff" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/staff" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/staff" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/staff" />
   </url>
 
   <!-- PARTNERS -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/partners</loc>
+    <loc>https://ziyoliavlod.com/uz/partners</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/partners" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/partners" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/partners" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/partners" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/partners</loc>
+    <loc>https://ziyoliavlod.com/en/partners</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/partners" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/partners" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/partners" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/partners" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/partners</loc>
+    <loc>https://ziyoliavlod.com/ru/partners</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/partners" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/partners" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/partners" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/partners" />
   </url>
 
   <!-- NEWS -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/news</loc>
+    <loc>https://ziyoliavlod.com/uz/news</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/news" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/news" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/news" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/news" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/news</loc>
+    <loc>https://ziyoliavlod.com/en/news</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/news" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/news" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/news" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/news" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/news</loc>
+    <loc>https://ziyoliavlod.com/ru/news</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/news" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/news" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/news" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/news" />
   </url>
 
   <!-- ANNOUNCEMENTS -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/announcements</loc>
+    <loc>https://ziyoliavlod.com/uz/announcements</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/announcements" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/announcements" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/announcements" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/announcements" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/announcements</loc>
+    <loc>https://ziyoliavlod.com/en/announcements</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/announcements" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/announcements" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/announcements" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/announcements" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/announcements</loc>
+    <loc>https://ziyoliavlod.com/ru/announcements</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/announcements" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/announcements" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/announcements" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/announcements" />
   </url>
 
   <!-- EVENTS -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/events</loc>
+    <loc>https://ziyoliavlod.com/uz/events</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/events" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/events" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/events" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/events</loc>
+    <loc>https://ziyoliavlod.com/en/events</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/events" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/events" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/events" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/events" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/events</loc>
+    <loc>https://ziyoliavlod.com/ru/events</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/events" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/events" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/events" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/events" />
   </url>
 
   <!-- ISSUES / ARTICLES -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/issues</loc>
+    <loc>https://ziyoliavlod.com/uz/issues</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/issues" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/issues" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/issues" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/issues" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/issues</loc>
+    <loc>https://ziyoliavlod.com/en/issues</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/issues" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/issues" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/issues" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/issues" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/issues</loc>
+    <loc>https://ziyoliavlod.com/ru/issues</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/issues" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/issues" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/issues" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/issues" />
   </url>
 
   <!-- AUTHORS -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/authors</loc>
+    <loc>https://ziyoliavlod.com/uz/authors</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/authors" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/authors" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/authors" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/authors" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/authors</loc>
+    <loc>https://ziyoliavlod.com/en/authors</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/authors" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/authors" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/authors" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/authors" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/authors</loc>
+    <loc>https://ziyoliavlod.com/ru/authors</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/authors" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/authors" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/authors" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/authors" />
   </url>
 
   <!-- AUTHOR GUIDE -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/author-guide</loc>
+    <loc>https://ziyoliavlod.com/uz/author-guide</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/author-guide" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/author-guide" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/author-guide" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/author-guide" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/author-guide</loc>
+    <loc>https://ziyoliavlod.com/en/author-guide</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/author-guide" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/author-guide" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/author-guide" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/author-guide" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/author-guide</loc>
+    <loc>https://ziyoliavlod.com/ru/author-guide</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/author-guide" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/author-guide" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/author-guide" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/author-guide" />
   </url>
 
   <!-- SUBMIT ARTICLE -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/submit-article</loc>
+    <loc>https://ziyoliavlod.com/uz/submit-article</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/submit-article" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/submit-article" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/submit-article" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/submit-article" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/submit-article</loc>
+    <loc>https://ziyoliavlod.com/en/submit-article</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/submit-article" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/submit-article" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/submit-article" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/submit-article" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/submit-article</loc>
+    <loc>https://ziyoliavlod.com/ru/submit-article</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/submit-article" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/submit-article" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/submit-article" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/submit-article" />
   </url>
 
   <!-- PROJECTS -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/projects</loc>
+    <loc>https://ziyoliavlod.com/uz/projects</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/projects" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/projects" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/projects" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/projects" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/projects</loc>
+    <loc>https://ziyoliavlod.com/en/projects</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/projects" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/projects" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/projects" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/projects" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/projects</loc>
+    <loc>https://ziyoliavlod.com/ru/projects</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/projects" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/projects" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/projects" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/projects" />
   </url>
 
   <!-- CONTACT -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/contact</loc>
+    <loc>https://ziyoliavlod.com/uz/contact</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/contact" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/contact" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/contact</loc>
+    <loc>https://ziyoliavlod.com/en/contact</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/contact" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/contact" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/contact" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/contact" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/contact</loc>
+    <loc>https://ziyoliavlod.com/ru/contact</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/contact" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/contact" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/contact" />
   </url>
 
   <!-- FAQ -->
   <url>
-    <loc>https://ziyoliavlod.uz/uz/faq</loc>
+    <loc>https://ziyoliavlod.com/uz/faq</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/faq" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/faq" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/faq" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/en/faq</loc>
+    <loc>https://ziyoliavlod.com/en/faq</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/faq" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/faq" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/faq" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/faq" />
   </url>
 
   <url>
-    <loc>https://ziyoliavlod.uz/ru/faq</loc>
+    <loc>https://ziyoliavlod.com/ru/faq</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/faq" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/faq" />
+    <xhtml:link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/faq" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/faq" />
   </url>
 
 </urlset>

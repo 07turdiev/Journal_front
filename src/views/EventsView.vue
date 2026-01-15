@@ -78,7 +78,7 @@ onMounted(() => {
     description: t('events.description') || 'Ziyoli Avlod jurnali tomonidan o\'tkaziladigan ilmiy tadbirlar, konferensiyalar va seminarlar.',
     keywords: t('events.keywords') || 'tadbirlar, konferensiyalar, seminarlar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadEventsData();
 });
 

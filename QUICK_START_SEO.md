@@ -102,8 +102,8 @@ Document Root: /public_html/ yoki /www/
 
 Browser'da quyidagilarni test qilish:
 ```
-https://ziyoliavlod.uz/robots.txt     → 200 OK
-https://ziyoliavlod.uz/sitemap.xml    → 200 OK
+https://ziyoliavlod.com/robots.txt     → 200 OK
+https://ziyoliavlod.com/sitemap.xml    → 200 OK
 ```
 
 ### Step 5: Google Search Console'da Ro'yxatga Olish
@@ -111,7 +111,7 @@ https://ziyoliavlod.uz/sitemap.xml    → 200 OK
 **Domain Property (Tavsiya etiladi):**
 ```
 1. https://search.google.com/search-console
-2. "Add property" → https://ziyoliavlod.uz
+2. "Add property" → https://ziyoliavlod.com
 3. DNS TXT record orqali tekshiruv
 4. Tekshiruv tugallangandan keyin "Claim property"
 ```
@@ -119,7 +119,7 @@ https://ziyoliavlod.uz/sitemap.xml    → 200 OK
 **Sitemap qo'shish:**
 ```
 1. Search Console → Sitemaps
-2. "https://ziyoliavlod.uz/sitemap.xml" qo'shish
+2. "https://ziyoliavlod.com/sitemap.xml" qo'shish
 3. Submit
 4. Status ko'rish: SUCCESS/QUEUED (1-48 soat)
 ```
@@ -128,7 +128,7 @@ https://ziyoliavlod.uz/sitemap.xml    → 200 OK
 
 ```
 1. https://www.bing.com/webmasters/
-2. "Add a site" → https://ziyoliavlod.uz
+2. "Add a site" → https://ziyoliavlod.com
 3. Tekshiruv: Meta tag (tez va oson)
 4. Sitemap qo'shish
 ```
@@ -264,14 +264,14 @@ https://ziyoliavlod.uz/sitemap.xml    → 200 OK
 
 ### Issue: Sitemap Not Indexed
 **Solution:**
-1. Check: `https://ziyoliavlod.uz/sitemap.xml` accessible?
+1. Check: `https://ziyoliavlod.com/sitemap.xml` accessible?
 2. Validate XML: https://validator.w3.org/
 3. Re-submit in Search Console
 4. Wait 24-48 hours
 
 ### Issue: robots.txt Errors
 **Solution:**
-1. Check: `https://ziyoliavlod.uz/robots.txt` accessible?
+1. Check: `https://ziyoliavlod.com/robots.txt` accessible?
 2. Validate syntax: https://tools.webconfs.com/robots-txt-parser.php
 3. Fix errors va re-deploy
 4. Refresh Search Console

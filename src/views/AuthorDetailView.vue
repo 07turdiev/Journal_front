@@ -138,10 +138,10 @@ watch(author, (newAuthor) => {
       title: newAuthor.name,
       description: `${newAuthor.name} - Ziyoli Avlod jurnalidagi muallif. ${newAuthor.publications?.length || 0} ta nashr.`,
       keywords: `${newAuthor.name}, muallif, ziyoli avlod, maqola muallifi`,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'profile'
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 

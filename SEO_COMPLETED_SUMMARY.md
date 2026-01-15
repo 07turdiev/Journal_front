@@ -234,24 +234,24 @@ Locales:
 ### Hreflang Setup ✅
 ```html
 <!-- Uzbek -->
-<link rel="alternate" hreflang="uz" href="https://ziyoliavlod.uz/uz/" />
+<link rel="alternate" hreflang="uz" href="https://ziyoliavlod.com/uz/" />
 
 <!-- English -->
-<link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/" />
+<link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/" />
 
 <!-- Russian -->
-<link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/" />
+<link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/" />
 
 <!-- Default -->
-<link rel="alternate" hreflang="x-default" href="https://ziyoliavlod.uz/" />
+<link rel="alternate" hreflang="x-default" href="https://ziyoliavlod.com/" />
 ```
 
 ### Sitemap Hreflang ✅
 ```xml
 <url>
-  <loc>https://ziyoliavlod.uz/uz/</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.uz/en/" />
-  <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.uz/ru/" />
+  <loc>https://ziyoliavlod.com/uz/</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://ziyoliavlod.com/en/" />
+  <xhtml:link rel="alternate" hreflang="ru" href="https://ziyoliavlod.com/ru/" />
 </url>
 ```
 
@@ -424,8 +424,8 @@ Locales:
 - [ ] Verify DNS propagation: https://www.dnschecker.org/
 
 ### Post-Deployment
-- [ ] Check robots.txt: https://ziyoliavlod.uz/robots.txt
-- [ ] Check sitemap: https://ziyoliavlod.uz/sitemap.xml
+- [ ] Check robots.txt: https://ziyoliavlod.com/robots.txt
+- [ ] Check sitemap: https://ziyoliavlod.com/sitemap.xml
 - [ ] Check meta tags in page source
 - [ ] Test canonical URL
 - [ ] Test hreflang tags

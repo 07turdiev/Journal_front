@@ -67,7 +67,7 @@ onMounted(() => {
     description: t('faq.description') || 'Ziyoli Avlod jurnali haqida tez-tez beriladigan savollar va ularning javoblari.',
     keywords: t('faq.keywords') || 'FAQ, savollar, javoblar, ko\'rsatmalar'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadFaqsData();
 });
 

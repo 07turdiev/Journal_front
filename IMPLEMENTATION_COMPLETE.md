@@ -135,22 +135,22 @@
 <meta property="og:title" content="AI in Scientific Research">
 <meta property="og:description" content="Exploring artificial intelligence applications in modern scientific research...">
 <meta property="og:image" content="https://api.example.com/articles/ai-research-2024.jpg">
-<meta property="og:url" content="https://ziyoliavlod.uz/uz/news/ai-research">
+<meta property="og:url" content="https://ziyoliavlod.com/uz/news/ai-research">
 <meta property="og:type" content="article">
 <meta property="article:author" content="Ziyoli Avlod">
 <meta property="article:published_time" content="2024-01-15T10:30:00Z">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://ziyoliavlod.uz/uz/news/ai-research">
+<link rel="canonical" href="https://ziyoliavlod.com/uz/news/ai-research">
 ```
 
 #### Example List Page (NewsView)
 ```html
 <meta property="og:title" content="Ziyoli Avlod - Yangiliklar">
 <meta property="og:description" content="Ziyoli Avlod jurnalining so'nggi yangiliklari va xabarlar">
-<meta property="og:image" content="https://ziyoliavlod.uz/og_default.jpg">
-<meta property="og:url" content="https://ziyoliavlod.uz/uz/news">
+<meta property="og:image" content="https://ziyoliavlod.com/og_default.jpg">
+<meta property="og:url" content="https://ziyoliavlod.com/uz/news">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://ziyoliavlod.uz/uz/news">
+<link rel="canonical" href="https://ziyoliavlod.com/uz/news">
 ```
 
 ---
@@ -249,7 +249,7 @@ onMounted(() => {
     description: 'Page description',
     keywords: 'key1, key2'
   });
-  setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
 });
 ```
 
@@ -261,7 +261,7 @@ watch(dataRef, (newData) => {
       title: newData.title,
       description: newData.description,
       image: newData.image,  // From API
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article'
     });
   }

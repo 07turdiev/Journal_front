@@ -12,7 +12,7 @@ export function usePageMeta() {
   const { locale } = useI18n()
 
   // Default image
-  const defaultImage = 'https://ziyoliavlod.uz/og_default.jpg'
+  const defaultImage = 'https://ziyoliavlod.com/og_default.jpg'
 
   // Set page meta tags
   const setPageMeta = (config) => {
@@ -28,7 +28,7 @@ export function usePageMeta() {
       dateModified
     } = config
 
-    const fullUrl = url || `https://ziyoliavlod.uz${route.fullPath}`
+    const fullUrl = url || `https://ziyoliavlod.com${route.fullPath}`
     const fullTitle = title ? `${title} - Ziyoli Avlod` : 'Ziyoli Avlod'
 
     useHead({
@@ -135,7 +135,7 @@ export function usePageMeta() {
       link: [
         {
           rel: 'canonical',
-          href: url || `https://ziyoliavlod.uz${route.fullPath}`
+          href: url || `https://ziyoliavlod.com${route.fullPath}`
         }
       ]
     })

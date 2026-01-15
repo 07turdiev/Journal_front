@@ -1,5 +1,5 @@
 # Sitemap
-Sitemap: https://ziyoliavlod.uz/sitemap.xml
+Sitemap: https://ziyoliavlod.com/sitemap.xml
 
 # Allow all robots
 User-agent: *

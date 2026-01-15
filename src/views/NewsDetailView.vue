@@ -257,13 +257,13 @@ watch(article, (newArticle) => {
       description: newArticle.intro || newArticle.content.substring(0, 160),
       keywords: `${newArticle.title}, ziyoli avlod, yangiliklar`,
       image: newArticle.image,
-      url: `https://ziyoliavlod.uz${route.fullPath}`,
+      url: `https://ziyoliavlod.com${route.fullPath}`,
       type: 'article',
       author: 'Ziyoli Avlod',
       datePublished: newArticle.date,
       dateModified: newArticle.date
     });
-    setCanonical(`https://ziyoliavlod.uz${route.fullPath}`);
+    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   }
 });
 
