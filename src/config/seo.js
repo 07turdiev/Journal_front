@@ -58,8 +58,8 @@ export const seoConfig = {
         description: 'Ziyoli Avlod jurnali haqida tez-tez beriladigan savollar va ularning javoblari.'
       },
       projects: {
-        title: 'Loyihalar - Ziyoli Avlod',
-        description: 'Ziyoli Avlod jurnali tomonidan amalga oshiriladigan ilmiy loyihalar va dasturlar.'
+        title: 'Ijodiy tanlovlar - Ziyoli Avlod',
+        description: 'Ziyoli Avlod jurnali tomonidan amalga oshiriladigan ijodiy tanlovlar va dasturlar.'
       },
       'editorial-board': {
         title: 'Tahrir Hay\'ati - Ziyoli Avlod',
