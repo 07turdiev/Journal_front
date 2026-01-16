@@ -16,7 +16,7 @@
         <div v-else class="content-wrapper">
           <div class="submission-card">
             <div class="card-avatar">
-              <img src="/assets/placeholder.png" alt="ORU Admin Avatar">
+              <img src="/assets/placeholder.png" alt="ziyoliavlod admin Avatar">
               <div class="active-icon"></div>
             </div>
             <div class="card-info">
