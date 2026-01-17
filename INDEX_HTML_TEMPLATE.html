@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Default Meta Tags (will be overridden by @vueuse/head) -->
+    <title>Vue 3 Multilingual SEO App</title>
+    <meta name="description" content="A production-ready Vue 3 application with multilingual support and dynamic SEO meta tags">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Default OpenGraph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="uz_UZ">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="ru_RU">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts (optional) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    
+    <!-- Stylesheets will be injected here by Vite -->
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <!-- Vue app will mount here -->
+    <div id="app"></div>
+    
+    <!-- 
+      Notes:
+      - The <html lang> attribute will be dynamically set by @vueuse/head
+      - Meta tags in <head> will be overridden by @vueuse/head based on current page
+      - Each page/post will have unique title, description, og:*, twitter:* tags
+      - Language prefix in URL (/uz, /en, /ru) controls which meta tags are applied
+    -->
+  </body>
+</html>
