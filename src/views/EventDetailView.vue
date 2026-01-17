@@ -53,10 +53,9 @@ const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
 const event = ref(null);
 
-const { updateData } = useDynamicSeoMeta({
+useDynamicSeoMeta({
   fallbackKey: 'events',
-  data: event,
-  useApiData: true
+  useApiData: false
 });
 
 // API dan ma'lumotlarni olish
@@ -90,18 +89,12 @@ const loadEventData = async (slug) => {
         event.value = {
           id: fullEventData.id,
           title: fullEventData.Nomi,
-          Nomi: fullEventData.Nomi,
-          Tavsifi: fullEventData.Tavsifi,
           content: getPlainText(fullEventData.Text),
           htmlContent: parseRichText(fullEventData.Text),
           date: fullEventData.Sana,
-          Sana: fullEventData.Sana,
           slug: uzSlug, // O'zbek tilidagi slug'ni ishlatish
-          image: getImageUrl(fullEventData.Rasmi?.[0]), // Rasmi array bo'lsa, birinchi elementini olish
-          Rasmi: getImageUrl(fullEventData.Rasmi?.[0])
+          image: getImageUrl(fullEventData.Rasmi?.[0]) // Rasmi array bo'lsa, birinchi elementini olish
         };
-        // Update meta tags when event data is loaded
-        updateData(event.value);
       } else {
         console.log(`Failed to load full event data`);
         event.value = null;

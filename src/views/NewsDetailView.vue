@@ -103,10 +103,9 @@ const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
 const article = ref(null);
 
-const { updateData } = useDynamicSeoMeta({
+useDynamicSeoMeta({
   fallbackKey: 'news',
-  data: article,
-  useApiData: true
+  useApiData: false
 });
 
 // API dan ma'lumotlarni olish
@@ -165,23 +164,16 @@ const loadArticleData = async (slug) => {
         article.value = {
           id: fullArticleData.id,
           title: fullArticleData.Nomi,
-          Nomi: fullArticleData.Nomi,
-          description: intro,
-          Tavsifi: intro,
           content: plainText,
           htmlContent: parseRichText(fullArticleData.Text),
           date: fullArticleData.Sana,
-          Sana: fullArticleData.Sana,
           slug: uzSlug,
           image: getImageUrl(fullArticleData.Rasmi),
-          Rasmi: getImageUrl(fullArticleData.Rasmi),
           category: fullArticleData.Kategoriya || 'Yangiliklar',
           views: fullArticleData.Korishlar || Math.floor(Math.random() * 5000) + 1000, // Placeholder if not available
           readingTime: readingTimeMinutes,
           intro: intro
         };
-        // Update meta tags when article data is loaded
-        updateData(article.value);
       } else {
         console.log(`Failed to load full article data`);
         article.value = null;

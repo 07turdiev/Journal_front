@@ -73,10 +73,9 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const project = ref(null);
 
-const { updateData } = useDynamicSeoMeta({
+useDynamicSeoMeta({
   fallbackKey: 'projects',
-  data: project,
-  useApiData: true
+  useApiData: false
 });
 
 // Helper: choose best image from Strapi response
@@ -127,19 +126,13 @@ const loadProjectData = async (slug) => {
       id: item.id || data.id,
       slug: data.slug || '',
       title: data.nomi || data.title || '',
-      Nomi: data.nomi || data.title || '',
       description: data.tavsif || data.description || '',
-      Tavsifi: data.tavsif || data.description || '',
       fullDescription: fullDesc,
       date: data.sana ? new Date(data.sana).toLocaleDateString() : (data.sana || ''),
-      Sana: data.sana || '',
       category: data.yanalish || data.category || '',
       image: getImageUrl(img),
-      Rasmi: getImageUrl(img),
       link: data.link || '#'
     }
-    // Update meta tags when project data is loaded
-    updateData(project.value);
   } catch (err) {
     console.error('Project data yuklanmadi:', err);
     project.value = null;
