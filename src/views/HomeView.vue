@@ -14,10 +14,7 @@ import InformationSection from '../components/InformationSection.vue';
 import ContactFaqSection from '../components/ContactFaqSection.vue';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
-useDynamicSeoMeta({
-  fallbackKey: 'home',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'home');
 </script>
 
 <style scoped>

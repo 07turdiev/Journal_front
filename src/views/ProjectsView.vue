@@ -117,10 +117,7 @@ const { getLocalizedPath } = useLocalizedRoute();
 
 const projects = ref([]);
 
-useDynamicSeoMeta({
-  fallbackKey: 'projects',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'projects');
 
 onMounted(() => {
   loadProjectsData();

@@ -73,10 +73,7 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const project = ref(null);
 
-useDynamicSeoMeta({
-  fallbackKey: 'projects',
-  useApiData: false
-});
+useDynamicSeoMeta(project, 'projects');
 
 // Helper: choose best image from Strapi response
 const pickImage = (rasmi) => {

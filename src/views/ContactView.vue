@@ -191,10 +191,7 @@ import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 const route = useRoute();
 const { t } = useI18n();
 
-useDynamicSeoMeta({
-  fallbackKey: 'contact',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'contact');
 
 const phone = ref('');
 const PHONE_REGEX = /^\+998\s\d{2}\s\d{3}\s\d{4}$/;

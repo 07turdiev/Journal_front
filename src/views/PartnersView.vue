@@ -39,10 +39,7 @@ const partners = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
-useDynamicSeoMeta({
-  fallbackKey: 'partners',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'partners');
 
 onMounted(() => {
   loadPartnersData();

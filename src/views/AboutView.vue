@@ -20,7 +20,6 @@
           <div class="markdown-content" v-html="aboutContent.htmlContent"></div>
         </div>
         
-        <!-- No content -->
         <div v-else class="no-content">
           <p>Ma'lumot topilmadi</p>
         </div>
@@ -42,10 +41,7 @@ const aboutContent = ref(null);
 const route = useRoute();
 const { loading, error, fetchData, currentLocale } = useApi();
 
-useDynamicSeoMeta({
-  fallbackKey: 'about',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'about');
 
 const toggleAccordion = (index) => {
   openIndex.value = openIndex.value === index ? null : index;

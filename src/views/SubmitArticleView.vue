@@ -78,10 +78,7 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const contactData = ref(null);
 
-useDynamicSeoMeta({
-  fallbackKey: 'submit_article',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'submit_article');
 
 onMounted(() => {
   loadContactData();

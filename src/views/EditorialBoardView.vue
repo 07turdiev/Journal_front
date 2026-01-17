@@ -60,10 +60,7 @@ const boardMembers = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
-useDynamicSeoMeta({
-  fallbackKey: 'editorial_board',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'editorial_board');
 
 onMounted(() => {
   loadEditorialBoardData();

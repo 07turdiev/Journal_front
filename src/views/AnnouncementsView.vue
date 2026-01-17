@@ -77,10 +77,7 @@ const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const announcements = ref([]);
 
-useDynamicSeoMeta({
-  fallbackKey: 'announcements',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'announcements');
 
 const search = ref((route.query.q || '').toString());
 const sort = ref((route.query.sort || 'newest').toString());

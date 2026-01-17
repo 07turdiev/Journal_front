@@ -84,10 +84,7 @@ const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const allNews = ref([]);
 
-useDynamicSeoMeta({
-  fallbackKey: 'news',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'news');
 
 onMounted(() => {
   loadNewsData();

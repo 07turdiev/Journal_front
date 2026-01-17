@@ -147,10 +147,7 @@ import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 const route = useRoute();
 const { t } = useI18n();
 
-useDynamicSeoMeta({
-  fallbackKey: 'issues',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'issues');
 
 onMounted(() => {
   loadArticlesData();

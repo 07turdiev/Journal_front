@@ -60,10 +60,7 @@ const staffMembers = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
-useDynamicSeoMeta({
-  fallbackKey: 'staff',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'staff');
 
 onMounted(() => {
   loadStaffData();

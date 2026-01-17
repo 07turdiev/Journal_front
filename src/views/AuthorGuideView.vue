@@ -45,10 +45,7 @@ const guideContent = ref(null);
 
 const { loading, error, fetchData, currentLocale } = useApi();
 
-useDynamicSeoMeta({
-  fallbackKey: 'author_guide',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'author_guide');
 
 onMounted(() => {
   loadGuideData();

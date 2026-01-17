@@ -45,10 +45,7 @@ const route = useRoute();
 const { t } = useI18n();
 const { getLocalizedPath } = useLocalizedRoute();
 
-useDynamicSeoMeta({
-  fallbackKey: 'not_found',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'not_found');
 </script>
 
 <style scoped>

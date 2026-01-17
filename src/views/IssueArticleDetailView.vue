@@ -149,10 +149,7 @@ const numOfPages = ref(0);
 const VuePdf = shallowRef(null);
 const createLoadingTask = shallowRef(null);
 
-useDynamicSeoMeta({
-  fallbackKey: 'article',
-  useApiData: false
-});
+useDynamicSeoMeta(article, 'article');
 
 const pageTitle = computed(() => 'Jurnal');
 

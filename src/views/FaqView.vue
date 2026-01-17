@@ -60,10 +60,7 @@ const { t } = useI18n();
 
 const openIndex = ref(0);
 
-useDynamicSeoMeta({
-  fallbackKey: 'faq',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'faq');
 
 onMounted(() => {
   loadFaqsData();

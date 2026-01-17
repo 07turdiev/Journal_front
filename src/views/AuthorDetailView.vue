@@ -67,10 +67,7 @@ const { loading, error, fetchData, currentLocale } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const author = ref(null);
 
-useDynamicSeoMeta({
-  fallbackKey: 'authors',
-  useApiData: false
-});
+useDynamicSeoMeta(author, 'authors');
 
 // Page title and breadcrumbs
 const pageTitle = computed(() => 'Muallif');

@@ -103,10 +103,7 @@ const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
 const article = ref(null);
 
-useDynamicSeoMeta({
-  fallbackKey: 'news',
-  useApiData: false
-});
+useDynamicSeoMeta(article, 'news');
 
 // API dan ma'lumotlarni olish
 const loadArticleData = async (slug) => {

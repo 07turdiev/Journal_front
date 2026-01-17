@@ -76,10 +76,7 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const authors = ref([]);
 
-useDynamicSeoMeta({
-  fallbackKey: 'authors',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'authors');
 
 onMounted(() => {
   loadAuthorsData();

@@ -71,10 +71,7 @@ const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const events = ref([]);
 
-useDynamicSeoMeta({
-  fallbackKey: 'events',
-  useApiData: false
-});
+useDynamicSeoMeta(null, 'events');
 
 onMounted(() => {
   loadEventsData();
