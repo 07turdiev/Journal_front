@@ -181,25 +181,19 @@
 
 <script setup>
 import { RouterLink, useRoute } from 'vue-router';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { ref, computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
-onMounted(() => {
-  setPageMeta({
-    title: t('contact.title') || 'Aloqa',
-    description: t('contact.description') || 'Ziyoli Avlod jurnali bilan aloqa qilish. Email, telefon va ijtimoiy tarmoq havolalari.',
-    keywords: t('contact.keywords') || 'aloqa, kontakt, email, telefon'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
-  loadContactData();
+useDynamicSeoMeta({
+  fallbackKey: 'contact',
+  useApiData: false
 });
 
 const phone = ref('');

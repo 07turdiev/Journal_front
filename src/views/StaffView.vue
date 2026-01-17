@@ -48,26 +48,24 @@
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import { usePageMeta } from '@/composables/usePageMeta';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const staffMembers = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
+useDynamicSeoMeta({
+  fallbackKey: 'staff',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('staff.title') || 'Tahririyat Xodimlari',
-    description: t('staff.description') || 'Ziyoli Avlod jurnalining tahririyat xodimlari va ularning mas\'uliyatlari.',
-    keywords: t('staff.keywords') || 'tahririyat xodimlari, jamoa, amaliyotchilar'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadStaffData();
 });
 

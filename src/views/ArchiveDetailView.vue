@@ -96,10 +96,16 @@ import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const { t } = useI18n();
 const route = useRoute();
 const openActionMenu = ref(null);
+
+useDynamicSeoMeta({
+  fallbackKey: 'archive',
+  useApiData: false
+});
 
 // O'ZGARTIRILDI: archiveId'ni 'computed'ga o'zgartirdik, bu uni reaktiv qiladi
 const archiveId = computed(() => route.params.id);

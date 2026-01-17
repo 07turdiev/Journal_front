@@ -61,18 +61,22 @@
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { parseMarkdown, parseRichText } from '@/utils/richTextParser';
 import DOMPurify from 'dompurify';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const project = ref(null);
+
+useDynamicSeoMeta({
+  fallbackKey: 'projects',
+  useApiData: false
+});
 
 // Helper: choose best image from Strapi response
 const pickImage = (rasmi) => {
@@ -144,21 +148,6 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadProjectData(newSlug);
   }
 }, { immediate: false });
-
-// Loyiha ma'lumotlari yuklangandan keyin meta teglarni yangilash
-watch(project, (newProject) => {
-  if (newProject) {
-    setPageMeta({
-      title: newProject.title,
-      description: newProject.description || newProject.title,
-      keywords: `${newProject.title}, ziyoli avlod, loyiha, tadqiqot`,
-      image: newProject.image,
-      url: `https://ziyoliavlod.com${route.fullPath}`,
-      type: 'article'
-    });
-    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
-  }
-});
 
 onMounted(() => {
   if (route.params.slug) {

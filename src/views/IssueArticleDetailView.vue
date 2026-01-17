@@ -130,14 +130,13 @@
 import { ref, computed, onMounted, onUnmounted, watch, shallowRef } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
@@ -149,6 +148,11 @@ const isPdfLoading = ref(false);
 const numOfPages = ref(0);
 const VuePdf = shallowRef(null);
 const createLoadingTask = shallowRef(null);
+
+useDynamicSeoMeta({
+  fallbackKey: 'article',
+  useApiData: false
+});
 
 const pageTitle = computed(() => 'Jurnal');
 
@@ -273,7 +277,6 @@ function handlePdfError(error) {
   pdfError.value = 'PDF faylni ko\'rsatishda xatolik yuz berdi. Iltimos, PDF ni to\'g\'ridan-to\'g\'ri ochishga harakat qiling.';
   isPdfLoading.value = false;
 }
-
 watch(currentLocale, () => {
   if (route.params.slug) {
     loadArticleData();
@@ -285,24 +288,6 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadArticleData();
   }
 }, { immediate: false });
-
-// Maqola ma'lumotlari yuklangandan keyin meta teglarni yangilash
-watch(article, (newArticle) => {
-  if (newArticle) {
-    setPageMeta({
-      title: newArticle.Mavzu,
-      description: newArticle.abstract || newArticle.Mavzu.substring(0, 160),
-      keywords: `${newArticle.Mavzu}, ziyoli avlod, ilmiy maqola, ${newArticle.keywords || ''}`,
-      image: newArticle.image,
-      url: `https://ziyoliavlod.com${route.fullPath}`,
-      type: 'article',
-      author: newArticle.author?.name || 'Ziyoli Avlod',
-      datePublished: newArticle.date,
-      dateModified: newArticle.date
-    });
-    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
-  }
-});
 
 onMounted(() => {
   if (route.params.slug) {

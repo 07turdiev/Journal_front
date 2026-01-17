@@ -33,26 +33,24 @@
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { parseMarkdown } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const guideContent = ref(null);
 
 const { loading, error, fetchData, currentLocale } = useApi();
 
+useDynamicSeoMeta({
+  fallbackKey: 'author_guide',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('author_guide.title') || 'Mualliflar Uchun Qo\'llanma',
-    description: t('author_guide.description') || 'Ziyoli Avlod jurnalida maqola nashr ettirishni istagan mualliflar uchun qo\'llanma va ko\'rsatmalar.',
-    keywords: t('author_guide.keywords') || 'muallif qo\'llanma, maqola yuborish, standartlar'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadGuideData();
 });
 

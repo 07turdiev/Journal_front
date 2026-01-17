@@ -88,21 +88,25 @@
 import { ref, watch, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
 const { getLocalizedPath } = useLocalizedRoute();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 // API integration
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
 const article = ref(null);
+
+useDynamicSeoMeta({
+  fallbackKey: 'news',
+  useApiData: false
+});
 
 // API dan ma'lumotlarni olish
 const loadArticleData = async (slug) => {
@@ -248,24 +252,6 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadArticleData(newSlug);
   }
 }, { immediate: false });
-
-// Maqola ma'lumotlari yuklangandan keyin meta teglarni yangilash
-watch(article, (newArticle) => {
-  if (newArticle) {
-    setPageMeta({
-      title: newArticle.title,
-      description: newArticle.intro || newArticle.content.substring(0, 160),
-      keywords: `${newArticle.title}, ziyoli avlod, yangiliklar`,
-      image: newArticle.image,
-      url: `https://ziyoliavlod.com${route.fullPath}`,
-      type: 'article',
-      author: 'Ziyoli Avlod',
-      datePublished: newArticle.date,
-      dateModified: newArticle.date
-    });
-    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
-  }
-});
 
 onMounted(() => {
   if (route.params.slug) {

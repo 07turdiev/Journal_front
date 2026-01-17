@@ -40,19 +40,23 @@
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 // API integration
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
 const announcement = ref(null);
+
+useDynamicSeoMeta({
+  fallbackKey: 'announcements',
+  useApiData: false
+});
 
 // API dan ma'lumotlarni olish
 const loadAnnouncementData = async (slug) => {
@@ -127,21 +131,6 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadAnnouncementData(newSlug);
   }
 }, { immediate: false });
-
-// E'lon ma'lumotlari yuklangandan keyin meta teglarni yangilash
-watch(announcement, (newAnnouncement) => {
-  if (newAnnouncement) {
-    setPageMeta({
-      title: newAnnouncement.title,
-      description: newAnnouncement.content.substring(0, 160) || 'Ziyoli Avlod jurnalining e\'lonlari',
-      keywords: `${newAnnouncement.title}, ziyoli avlod, e'lon, xabar`,
-      image: newAnnouncement.image,
-      url: `https://ziyoliavlod.com${route.fullPath}`,
-      type: 'article'
-    });
-    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
-  }
-});
 
 onMounted(() => {
   if (route.params.slug) {

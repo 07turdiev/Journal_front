@@ -62,10 +62,10 @@
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
@@ -73,21 +73,19 @@ const router = useRouter();
 
 // API integration
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const announcements = ref([]);
+
+useDynamicSeoMeta({
+  fallbackKey: 'announcements',
+  useApiData: false
+});
 
 const search = ref((route.query.q || '').toString());
 const sort = ref((route.query.sort || 'newest').toString());
 
 onMounted(() => {
-  setPageMeta({
-    title: t('announcements.title') || 'E\'lonlar',
-    description: t('announcements.description') || 'Ziyoli Avlod jurnalining rasmiy e\'lonlari va muhim xabarlar.',
-    keywords: t('announcements.keywords') || 'e\'lonlar, xabarlar, bildirish'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadAnnouncementsData();
 });
 

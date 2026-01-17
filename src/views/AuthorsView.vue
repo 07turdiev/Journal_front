@@ -63,27 +63,25 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText } from '@/utils/richTextParser';
 
 const router = useRouter();
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const authors = ref([]);
 
+useDynamicSeoMeta({
+  fallbackKey: 'authors',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('authors.title') || 'Mualliflar',
-    description: t('authors.description') || 'Ziyoli Avlod jurnalida nashr ettirilgan mualliflar ro\'yxati. Mualliflar haqida ma\'lumot va ularning nashriyotlarini ko\'ring.',
-    keywords: t('authors.keywords') || 'mualliflar, ma\'qolalar mualliflari, yozuvchilar'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadAuthorsData();
 });
 

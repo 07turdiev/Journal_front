@@ -139,22 +139,20 @@ import { ref, onMounted, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
+
+useDynamicSeoMeta({
+  fallbackKey: 'issues',
+  useApiData: false
+});
 
 onMounted(() => {
-  setPageMeta({
-    title: t('issues.title') || 'Maqolalar',
-    description: t('issues.description') || 'Ziyoli Avlod jurnalining barcha nashriyotlari, maqolalari va tadqiqotlari. Qidiruv va filtrlash orqali kerakli maqolani toping.',
-    keywords: t('issues.keywords') || 'maqolalar, nashriyotlar, tadqiqot'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadArticlesData();
 });
 

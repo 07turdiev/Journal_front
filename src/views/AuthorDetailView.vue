@@ -55,18 +55,22 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const author = ref(null);
+
+useDynamicSeoMeta({
+  fallbackKey: 'authors',
+  useApiData: false
+});
 
 // Page title and breadcrumbs
 const pageTitle = computed(() => 'Muallif');
@@ -130,20 +134,6 @@ watch(() => route.params.slug, (newSlug, oldSlug) => {
     loadAuthorData(newSlug);
   }
 }, { immediate: false });
-
-// Muallif ma'lumotlari yuklangandan keyin meta teglarni yangilash
-watch(author, (newAuthor) => {
-  if (newAuthor) {
-    setPageMeta({
-      title: newAuthor.name,
-      description: `${newAuthor.name} - Ziyoli Avlod jurnalidagi muallif. ${newAuthor.publications?.length || 0} ta nashr.`,
-      keywords: `${newAuthor.name}, muallif, ziyoli avlod, maqola muallifi`,
-      url: `https://ziyoliavlod.com${route.fullPath}`,
-      type: 'profile'
-    });
-    setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
-  }
-});
 
 onMounted(() => {
   if (route.params.slug) {

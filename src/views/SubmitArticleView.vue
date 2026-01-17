@@ -68,24 +68,22 @@
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import { usePageMeta } from '@/composables/usePageMeta';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const contactData = ref(null);
 
+useDynamicSeoMeta({
+  fallbackKey: 'submit_article',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('submit_article.title') || 'Maqola Yuborish',
-    description: t('submit_article.description') || 'Ziyoli Avlod jurnalida o\'z maqolangizni yuborish. To\'liq forma va kerakli hujjatlar uchun qo\'llanma.',
-    keywords: t('submit_article.keywords') || 'maqola yuborish, nashr etish, ilmiy maqola'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadContactData();
 });
 

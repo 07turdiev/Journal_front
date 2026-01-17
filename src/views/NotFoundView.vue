@@ -38,21 +38,16 @@ import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 const { getLocalizedPath } = useLocalizedRoute();
 
-onMounted(() => {
-  setPageMeta({
-    title: 'Ziyoli Avlod - Sahifa topilmadi',
-    description: 'Kechirasiz, so\'ralgan sahifa topilmadi.',
-    keywords: '404, sahifa topilmadi'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
+useDynamicSeoMeta({
+  fallbackKey: 'not_found',
+  useApiData: false
 });
 </script>
 

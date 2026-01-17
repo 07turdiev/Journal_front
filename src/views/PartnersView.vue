@@ -28,25 +28,23 @@
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const partners = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
+useDynamicSeoMeta({
+  fallbackKey: 'partners',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('partners.title') || 'Hamkorlar',
-    description: t('partners.description') || 'Ziyoli Avlod jurnalining hamkor tashkilotlar va universitetlari.',
-    keywords: t('partners.keywords') || 'hamkorlar, tashkilotlar, universitetlar'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadPartnersData();
 });
 

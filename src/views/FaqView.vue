@@ -50,24 +50,22 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const openIndex = ref(0);
 
+useDynamicSeoMeta({
+  fallbackKey: 'faq',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('faq.title') || 'Tez-Tez Beriladigan Savollar',
-    description: t('faq.description') || 'Ziyoli Avlod jurnali haqida tez-tez beriladigan savollar va ularning javoblari.',
-    keywords: t('faq.keywords') || 'FAQ, savollar, javoblar, ko\'rsatmalar'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadFaqsData();
 });
 

@@ -105,26 +105,24 @@ import { ref, computed, watch, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 
 const projects = ref([]);
 
+useDynamicSeoMeta({
+  fallbackKey: 'projects',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('projects.title') || 'Loyihalar',
-    description: t('projects.description') || 'Ziyoli Avlod jurnali tomonidan amalga oshiriladigan ilmiy loyihalar va dasturlar.',
-    keywords: t('projects.keywords') || 'loyihalar, tadqiqotlar, ilmiy loyihalar'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadProjectsData();
 });
 

@@ -48,26 +48,24 @@
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 const boardMembers = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
+useDynamicSeoMeta({
+  fallbackKey: 'editorial_board',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('editorial_board.title') || 'Tahrir Hay\'ati',
-    description: t('editorial_board.description') || 'Ziyoli Avlod jurnalining tahrir hay\'ati a\'zolari va ularning professional faoliyati.',
-    keywords: t('editorial_board.keywords') || 'tahrir hay\'ati, muharrirlar, a\'zolar'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadEditorialBoardData();
 });
 

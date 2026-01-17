@@ -56,29 +56,27 @@
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { usePageMeta } from '@/composables/usePageMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
-const { setPageMeta, setCanonical } = usePageMeta();
 
 // API integration
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const events = ref([]);
 
+useDynamicSeoMeta({
+  fallbackKey: 'events',
+  useApiData: false
+});
+
 onMounted(() => {
-  setPageMeta({
-    title: t('events.title') || 'Tadbirlar',
-    description: t('events.description') || 'Ziyoli Avlod jurnali tomonidan o\'tkaziladigan ilmiy tadbirlar, konferensiyalar va seminarlar.',
-    keywords: t('events.keywords') || 'tadbirlar, konferensiyalar, seminarlar'
-  });
-  setCanonical(`https://ziyoliavlod.com${route.fullPath}`);
   loadEventsData();
 });
 
