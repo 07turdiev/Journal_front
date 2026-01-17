@@ -2,18 +2,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import i18n from './i18n'
-import { createHead } from '@vueuse/head'
+import i18n from './i18n' // <-- i18n faylini import qilamiz
 
 const app = createApp(App)
 
-// Initialize @vueuse/head for SEO meta tag management
-const head = createHead()
-
-// Install plugins
-app.use(head)
 app.use(router)
-app.use(i18n)
+app.use(i18n) // <-- Loyihaga i18n'ni ulaymiz
 
-// Mount the application
 app.mount('#app')
