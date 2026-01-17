@@ -101,10 +101,12 @@ import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 const { t } = useI18n();
 const route = useRoute();
 const openActionMenu = ref(null);
+const archive = ref(null);
 
-useDynamicSeoMeta({
+const { updateData } = useDynamicSeoMeta({
   fallbackKey: 'archive',
-  useApiData: false
+  data: archive,
+  useApiData: true
 });
 
 // O'ZGARTIRILDI: archiveId'ni 'computed'ga o'zgartirdik, bu uni reaktiv qiladi

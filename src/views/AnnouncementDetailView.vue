@@ -52,10 +52,10 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
 const announcement = ref(null);
-
-useDynamicSeoMeta({
+const { updateData } = useDynamicSeoMeta({
   fallbackKey: 'announcements',
-  useApiData: false
+  data: announcement,
+  useApiData: true
 });
 
 // API dan ma'lumotlarni olish
@@ -89,12 +89,18 @@ const loadAnnouncementData = async (slug) => {
         announcement.value = {
           id: fullAnnouncementData.id,
           title: fullAnnouncementData.Nomi,
+          Nomi: fullAnnouncementData.Nomi,
+          Tavsifi: fullAnnouncementData.Tavsifi,
           content: getPlainText(fullAnnouncementData.Text),
           htmlContent: parseRichText(fullAnnouncementData.Text),
           date: fullAnnouncementData.Sana,
+          Sana: fullAnnouncementData.Sana,
           slug: uzSlug, // O'zbek tilidagi slug'ni ishlatish
-          image: getImageUrl(fullAnnouncementData.Rasmi)
+          image: getImageUrl(fullAnnouncementData.Rasmi),
+          Rasmi: getImageUrl(fullAnnouncementData.Rasmi)
         };
+        // Update meta tags when announcement data is loaded
+        updateData(announcement.value);
       } else {
         console.log(`Failed to load full announcement data`);
         announcement.value = null;

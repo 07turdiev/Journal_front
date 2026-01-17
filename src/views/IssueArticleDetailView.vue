@@ -149,9 +149,10 @@ const numOfPages = ref(0);
 const VuePdf = shallowRef(null);
 const createLoadingTask = shallowRef(null);
 
-useDynamicSeoMeta({
+const { updateData } = useDynamicSeoMeta({
   fallbackKey: 'article',
-  useApiData: false
+  data: article,
+  useApiData: true
 });
 
 const pageTitle = computed(() => 'Jurnal');
@@ -198,11 +199,15 @@ const loadArticleData = async () => {
         id: articleData.id,
         documentId: articleData.documentId,
         Mavzu: articleData.mavzu || '',
+        title: articleData.mavzu || '',
         Yonalishi: null, // Yangi API'da yo'q
         Maqola_ID: articleData.maqola_id || null,
         date: formattedDate || articleData.sana || null,
+        Sana: formattedDate || articleData.sana || null,
         volumeIssue: articleData.son || null,
         abstract: articleData.Annotatsiya || '',
+        description: articleData.Annotatsiya || '',
+        Tavsifi: articleData.Annotatsiya || '',
         keywords: articleData.Kalit_suzlar || null,
         pdfAbsoluteUrl: articleData.pdf ? getImageUrl(articleData.pdf) : null,
         pdfEmbedUrl: articleData.pdf ? getImageUrl(articleData.pdf) : null,
@@ -228,6 +233,8 @@ const loadArticleData = async () => {
         pdfUrl.value = null;
         numOfPages.value = 0;
       }
+      // Update meta tags when article data is loaded
+      updateData(article.value);
     } else {
       article.value = null;
     }

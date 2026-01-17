@@ -67,9 +67,10 @@ const { loading, error, fetchData, currentLocale } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const author = ref(null);
 
-useDynamicSeoMeta({
+const { updateData } = useDynamicSeoMeta({
   fallbackKey: 'authors',
-  useApiData: false
+  data: author,
+  useApiData: true
 });
 
 // Page title and breadcrumbs
@@ -105,8 +106,17 @@ const loadAuthorData = async (slug) => {
         author.value = {
           id: fullAuthorData.id,
           name: fullAuthorData.Ismi || fullAuthorData.Ism_familiyasi,
+          Ismi: fullAuthorData.Ismi || fullAuthorData.Ism_familiyasi,
+          title: fullAuthorData.Ismi || fullAuthorData.Ism_familiyasi,
+          Nomi: fullAuthorData.Ismi || fullAuthorData.Ism_familiyasi,
+          description: fullAuthorData.Tavsifi || '',
+          Tavsifi: fullAuthorData.Tavsifi || '',
+          image: fullAuthorData.Rasmi || '',
+          Rasmi: fullAuthorData.Rasmi || '',
           publications: fullAuthorData.Publications || fullAuthorData.jurnal_sonlarises || []
         };
+        // Update meta tags when author data is loaded
+        updateData(author.value);
       } else {
         author.value = null;
       }

@@ -11,6 +11,7 @@ export function useDynamicSeoMeta(options = {}) {
   const {
     endpoint = null,
     fallbackKey = null,
+    data = null,
     useApiData = true
   } = options
 
@@ -19,9 +20,7 @@ export function useDynamicSeoMeta(options = {}) {
   const { setPageMeta, setCanonical } = usePageMeta()
   const { fetchData } = useApi()
 
-  const apiData = ref(null)
-  const loading = ref(false)
-  const error = ref(null)
+  const apiData = ref(data)
 
   // Extract language-specific value from API response
   const getLocalizedValue = (obj) => {
@@ -33,46 +32,63 @@ export function useDynamicSeoMeta(options = {}) {
     return ''
   }
 
-  // Fetch data from API endpoint
-  const fetchSeoData = async () => {
-    if (!endpoint) return
-
-    loading.value = true
-    error.value = null
-
-    try {
-      const data = await fetchData(endpoint)
-      apiData.value = data
-      applyMetaTags()
-    } catch (err) {
-      error.value = err.message
-      // Fallback to i18n if API fails
-      if (fallbackKey) {
-        applyMetaTags()
-      }
-    } finally {
-      loading.value = false
-    }
-  }
-
   // Apply meta tags from API data or i18n fallback
   const applyMetaTags = () => {
     let title = ''
     let description = ''
     let keywords = ''
     let image = ''
+    let author = 'Ziyoli Avlod'
+    let datePublished = null
+    let dateModified = null
+    let type = 'website'
 
+    // Try to use API data first if available
     if (apiData.value && useApiData) {
-      // Extract from API data with language-specific fields
-      title = getLocalizedValue(apiData.value.title) || getLocalizedValue(apiData.value.Mavzu)
+      // Handle different API field names
+      title = getLocalizedValue(apiData.value.title) || 
+              getLocalizedValue(apiData.value.Mavzu) ||
+              getLocalizedValue(apiData.value.Nomi) ||
+              apiData.value.name ||
+              apiData.value.nomi ||
+              ''
+      
       description = getLocalizedValue(apiData.value.description) || 
                    getLocalizedValue(apiData.value.abstract) ||
+                   getLocalizedValue(apiData.value.Text) ||
+                   getLocalizedValue(apiData.value.tavsifi) ||
                    ''
-      keywords = getLocalizedValue(apiData.value.keywords) || ''
-      image = apiData.value.image || apiData.value.cover || ''
+      
+      keywords = getLocalizedValue(apiData.value.keywords) || 
+                getLocalizedValue(apiData.value.Kalit_Sözlər) ||
+                ''
+      
+      image = apiData.value.image || 
+              apiData.value.cover?.src ||
+              apiData.value.Rasmi ||
+              apiData.value.muqova?.url ||
+              ''
+      
+      author = apiData.value.author?.name || 
+               getLocalizedValue(apiData.value.author) ||
+               apiData.value.mualliflar?.name ||
+               apiData.value.mualliflars?.[0]?.name ||
+               'Ziyoli Avlod'
+      
+      datePublished = apiData.value.datePublished || 
+                     apiData.value.date ||
+                     apiData.value.Sana ||
+                     apiData.value.createdAt ||
+                     null
+      
+      dateModified = apiData.value.dateModified || 
+                    apiData.value.updatedAt ||
+                    datePublished
+
+      type = apiData.value.type || 'article'
     }
 
-    // Fallback to i18n if no API data or fields missing
+    // Fallback to i18n if no API data or required fields missing
     if (!title && fallbackKey) {
       title = t(`${fallbackKey}.title`) || ''
     }
@@ -82,22 +98,9 @@ export function useDynamicSeoMeta(options = {}) {
     if (!keywords && fallbackKey) {
       keywords = t(`${fallbackKey}.keywords`) || ''
     }
-
-    // Get additional metadata
-    const author = apiData.value?.author?.name || 
-                   getLocalizedValue(apiData.value?.author) ||
-                   'Ziyoli Avlod'
-    
-    const datePublished = apiData.value?.datePublished || 
-                         apiData.value?.date ||
-                         apiData.value?.createdAt ||
-                         null
-    
-    const dateModified = apiData.value?.dateModified || 
-                        apiData.value?.updatedAt ||
-                        datePublished
-
-    const type = apiData.value?.type || 'website'
+    if (!image && fallbackKey) {
+      image = t(`${fallbackKey}.image`) || ''
+    }
 
     // Set the page meta
     setPageMeta({
@@ -116,6 +119,12 @@ export function useDynamicSeoMeta(options = {}) {
     setCanonical(`https://ziyoliavlod.com${route.fullPath}`)
   }
 
+  // Update API data when passed as prop/option changes
+  const updateData = (newData) => {
+    apiData.value = newData
+    applyMetaTags()
+  }
+
   // Watch for language changes and update meta tags
   watch(
     () => locale.value,
@@ -124,7 +133,7 @@ export function useDynamicSeoMeta(options = {}) {
     }
   )
 
-  // Watch for route changes and fetch new data
+  // Watch for route changes and fetch new data if endpoint provided
   watch(
     () => route.fullPath,
     () => {
@@ -136,9 +145,22 @@ export function useDynamicSeoMeta(options = {}) {
     }
   )
 
+  // Watch for data changes if data is passed as option
+  watch(
+    () => data,
+    (newData) => {
+      if (newData) {
+        updateData(newData)
+      }
+    },
+    { deep: true }
+  )
+
   // Initial setup
   onMounted(() => {
-    if (endpoint) {
+    if (apiData.value && useApiData) {
+      applyMetaTags()
+    } else if (endpoint) {
       fetchSeoData()
     } else if (fallbackKey) {
       applyMetaTags()
@@ -147,9 +169,7 @@ export function useDynamicSeoMeta(options = {}) {
 
   return {
     apiData,
-    loading,
-    error,
-    fetchSeoData,
+    updateData,
     applyMetaTags
   }
 }
