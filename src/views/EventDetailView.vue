@@ -42,6 +42,7 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
@@ -51,6 +52,8 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
 const event = ref(null);
+
+useDynamicSeoMeta(event, 'events');
 
 // API dan ma'lumotlarni olish
 const loadEventData = async (slug) => {

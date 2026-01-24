@@ -34,10 +34,18 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 
+const route = useRoute();
+const { t } = useI18n();
 const { getLocalizedPath } = useLocalizedRoute();
+
+useDynamicSeoMeta(null, 'not_found');
 </script>
 
 <style scoped>

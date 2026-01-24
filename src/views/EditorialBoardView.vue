@@ -47,15 +47,24 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
+const route = useRoute();
 const { t } = useI18n();
 
 const boardMembers = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
+
+useDynamicSeoMeta(null, 'editorial_board');
+
+onMounted(() => {
+  loadEditorialBoardData();
+});
 
 const loadEditorialBoardData = async () => {
   try {

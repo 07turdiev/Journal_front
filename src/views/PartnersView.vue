@@ -27,13 +27,23 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
+const route = useRoute();
 const { t } = useI18n();
+
 const partners = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
+
+useDynamicSeoMeta(null, 'partners');
+
+onMounted(() => {
+  loadPartnersData();
+});
 
 const loadPartnersData = async () => {
   try {

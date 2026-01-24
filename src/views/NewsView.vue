@@ -72,6 +72,7 @@ import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
@@ -82,6 +83,12 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const allNews = ref([]);
+
+useDynamicSeoMeta(null, 'news');
+
+onMounted(() => {
+  loadNewsData();
+});
 
 // UI state synced with route query
 const search = ref((route.query.q || '').toString());

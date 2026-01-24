@@ -47,14 +47,24 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
+const route = useRoute();
 const { t } = useI18n();
+
 const staffMembers = ref([]);
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
+
+useDynamicSeoMeta(null, 'staff');
+
+onMounted(() => {
+  loadStaffData();
+});
 
 const loadStaffData = async () => {
   try {

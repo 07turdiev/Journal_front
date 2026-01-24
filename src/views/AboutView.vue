@@ -20,7 +20,6 @@
           <div class="markdown-content" v-html="aboutContent.htmlContent"></div>
         </div>
         
-        <!-- No content -->
         <div v-else class="no-content">
           <p>Ma'lumot topilmadi</p>
         </div>
@@ -31,20 +30,22 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { parseMarkdown } from '@/utils/richTextParser';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const openIndex = ref(0);
 const aboutContent = ref(null);
+const route = useRoute();
+const { loading, error, fetchData, currentLocale } = useApi();
+
+useDynamicSeoMeta(null, 'about');
 
 const toggleAccordion = (index) => {
   openIndex.value = openIndex.value === index ? null : index;
 };
-
-const { t } = useI18n();
-const { loading, error, fetchData, currentLocale } = useApi();
 
 const loadAboutData = async () => {
   try {

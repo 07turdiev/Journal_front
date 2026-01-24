@@ -32,14 +32,24 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { parseMarkdown } from '@/utils/richTextParser';
+
+const route = useRoute();
+const { t } = useI18n();
 
 const guideContent = ref(null);
 
-const { t } = useI18n();
 const { loading, error, fetchData, currentLocale } = useApi();
+
+useDynamicSeoMeta(null, 'author_guide');
+
+onMounted(() => {
+  loadGuideData();
+});
 
 const loadGuideData = async () => {
   try {

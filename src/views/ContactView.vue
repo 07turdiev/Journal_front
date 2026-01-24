@@ -180,12 +180,18 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
 import { ref, computed, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
+
+const route = useRoute();
+const { t } = useI18n();
+
+useDynamicSeoMeta(null, 'contact');
 
 const phone = ref('');
 const PHONE_REGEX = /^\+998\s\d{2}\s\d{3}\s\d{4}$/;

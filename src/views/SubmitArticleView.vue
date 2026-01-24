@@ -16,7 +16,7 @@
         <div v-else class="content-wrapper">
           <div class="submission-card">
             <div class="card-avatar">
-              <img src="/assets/placeholder.png" alt="ORU Admin Avatar">
+              <img src="/assets/placeholder.png" alt="ziyoliavlod admin Avatar">
               <div class="active-icon"></div>
             </div>
             <div class="card-info">
@@ -67,13 +67,22 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 
+const route = useRoute();
 const { t } = useI18n();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const contactData = ref(null);
+
+useDynamicSeoMeta(null, 'submit_article');
+
+onMounted(() => {
+  loadContactData();
+});
 
 const loadContactData = async () => {
   try {

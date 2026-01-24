@@ -61,11 +61,15 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const { t } = useI18n();
 
 const router = useRouter();
 const { getLocalizedPath } = useLocalizedRoute();
+
+useDynamicSeoMeta(null, 'archive');
+
 const archives = ref([
     { id: '1-son-2025', name: '1-Son', date: '01.01.2025' }, { id: '2-son-2025', name: '2-Son', date: '01.02.2025' },
     { id: '3-son-2025', name: '3-Son', date: '01.03.2025' }, { id: '4-son-2025', name: '4-Son', date: '01.04.2025' },

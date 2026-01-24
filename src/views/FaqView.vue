@@ -52,12 +52,19 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
 
 const openIndex = ref(0);
+
+useDynamicSeoMeta(null, 'faq');
+
+onMounted(() => {
+  loadFaqsData();
+});
 
 const toggleAccordion = (index) => {
   if (openIndex.value === index) {

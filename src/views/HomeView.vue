@@ -12,6 +12,9 @@ import HeroSection from '../components/HeroSection.vue';
 import ServicesCards from '../components/ServicesCards.vue';
 import InformationSection from '../components/InformationSection.vue';
 import ContactFaqSection from '../components/ContactFaqSection.vue';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
+
+useDynamicSeoMeta(null, 'home');
 </script>
 
 <style scoped>

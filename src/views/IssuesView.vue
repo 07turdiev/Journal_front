@@ -137,12 +137,22 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
+const route = useRoute();
 const { t } = useI18n();
+
+useDynamicSeoMeta(null, 'issues');
+
+onMounted(() => {
+  loadArticlesData();
+});
+
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 

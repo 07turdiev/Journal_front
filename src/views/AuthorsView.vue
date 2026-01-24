@@ -61,18 +61,26 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText } from '@/utils/richTextParser';
 
 const router = useRouter();
+const route = useRoute();
 const { t } = useI18n();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const authors = ref([]);
+
+useDynamicSeoMeta(null, 'authors');
+
+onMounted(() => {
+  loadAuthorsData();
+});
 
 // Breadcrumbs
 const breadcrumbs = computed(() => [

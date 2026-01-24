@@ -63,6 +63,7 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { parseMarkdown, parseRichText } from '@/utils/richTextParser';
 import DOMPurify from 'dompurify';
 
@@ -71,6 +72,8 @@ const { t } = useI18n();
 
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const project = ref(null);
+
+useDynamicSeoMeta(project, 'projects');
 
 // Helper: choose best image from Strapi response
 const pickImage = (rasmi) => {

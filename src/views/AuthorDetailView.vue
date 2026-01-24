@@ -58,6 +58,7 @@ import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -65,6 +66,8 @@ const { t } = useI18n();
 const { loading, error, fetchData, currentLocale } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const author = ref(null);
+
+useDynamicSeoMeta(author, 'authors');
 
 // Page title and breadcrumbs
 const pageTitle = computed(() => 'Muallif');

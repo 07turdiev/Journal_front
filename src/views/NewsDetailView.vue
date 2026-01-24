@@ -90,6 +90,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
@@ -101,6 +102,8 @@ const { getLocalizedPath } = useLocalizedRoute();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 
 const article = ref(null);
+
+useDynamicSeoMeta(article, 'news');
 
 // API dan ma'lumotlarni olish
 const loadArticleData = async (slug) => {

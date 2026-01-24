@@ -116,7 +116,7 @@
   },
   "submit_article": {
     "title": "Maqola Yuborish",
-    "admin_name": "ORU Admin",
+    "admin_name": "ziyoliavlod admin",
     "phone": "(90) 985-69-77",
     "telegram": "Telegram kanal",
     "instruction": "Maqolani yuborish uchun telegram orqali adminga murjaat qiling!",
@@ -231,11 +231,11 @@
     "no_partners": "Ma'lumot topilmadi"
   },
   "projects": {
-    "title": "Loyihalar",
+    "title": "Ijodiy tanlovlar",
     "view_project": "Loyihani ko'rish",
     "filter": "Filtr",
     "all_categories": "Barcha kategoriyalar",
-    "search_placeholder": "Loyihalarni qidirish",
+    "search_placeholder": "Ijodiy tanlovlarni qidirish",
     "no_results": "Natija topilmadi.",
     "not_found": "Loyiha topilmadi",
     "not_found_desc": "Kechirasiz, so'ralgan loyiha mavjud emas."

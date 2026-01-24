@@ -103,16 +103,25 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
+const route = useRoute();
 const { t } = useI18n();
 const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 
-const projects = ref([])
+const projects = ref([]);
+
+useDynamicSeoMeta(null, 'projects');
+
+onMounted(() => {
+  loadProjectsData();
+});
 
 // Helper: choose best image from Strapi response
 const pickImage = (rasmi) => {

@@ -65,6 +65,7 @@ import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import { getPlainText, parseRichText } from '@/utils/richTextParser';
 
 const route = useRoute();
@@ -76,8 +77,14 @@ const { loading, error, fetchData, currentLocale, getImageUrl } = useApi();
 const { getLocalizedPath } = useLocalizedRoute();
 const announcements = ref([]);
 
+useDynamicSeoMeta(null, 'announcements');
+
 const search = ref((route.query.q || '').toString());
 const sort = ref((route.query.sort || 'newest').toString());
+
+onMounted(() => {
+  loadAnnouncementsData();
+});
 
 // API dan ma'lumotlarni olish
 const loadAnnouncementsData = async () => {

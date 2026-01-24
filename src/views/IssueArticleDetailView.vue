@@ -130,6 +130,7 @@
 import { ref, computed, onMounted, onUnmounted, watch, shallowRef } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
@@ -147,6 +148,8 @@ const isPdfLoading = ref(false);
 const numOfPages = ref(0);
 const VuePdf = shallowRef(null);
 const createLoadingTask = shallowRef(null);
+
+useDynamicSeoMeta(article, 'article');
 
 const pageTitle = computed(() => 'Jurnal');
 
@@ -271,7 +274,6 @@ function handlePdfError(error) {
   pdfError.value = 'PDF faylni ko\'rsatishda xatolik yuz berdi. Iltimos, PDF ni to\'g\'ridan-to\'g\'ri ochishga harakat qiling.';
   isPdfLoading.value = false;
 }
-
 watch(currentLocale, () => {
   if (route.params.slug) {
     loadArticleData();
