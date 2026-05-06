@@ -70,7 +70,7 @@
             <div class="article-image-container" v-if="article.image">
               <img :src="article.image" :alt="article.title" class="article-image" @error="handleImageError">
             </div>
-            <div class="article-content" v-html="article.htmlContent || article.content"></div>
+            <MarkdownContent class="article-content" :markdown="article.markdown" :blocks="article.blocks" />
           </div>
         </div>
       </div>
@@ -91,7 +91,8 @@ import { useI18n } from 'vue-i18n';
 import { useApi } from '@/composables/useApi';
 import { useLocalizedRoute } from '@/composables/useLocalizedRoute';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
-import { getPlainText, parseRichText } from '@/utils/richTextParser';
+import { getPlainText } from '@/utils/richTextParser';
+import MarkdownContent from '@/components/MarkdownContent.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -162,7 +163,8 @@ const loadArticleData = async (slug) => {
           id: fullArticleData.id,
           title: fullArticleData.Nomi,
           content: plainText,
-          htmlContent: parseRichText(fullArticleData.Text),
+          markdown: fullArticleData.Text_md || '',
+          blocks: fullArticleData.Text || [],
           date: fullArticleData.Sana,
           slug: uzSlug,
           image: getImageUrl(fullArticleData.Rasmi),

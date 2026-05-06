@@ -17,7 +17,7 @@
         
         <!-- Content -->
         <div v-else-if="aboutContent" class="content-wrapper">
-          <div class="markdown-content" v-html="aboutContent.htmlContent"></div>
+          <MarkdownContent :markdown="aboutContent.markdown" />
         </div>
         
         <div v-else class="no-content">
@@ -32,8 +32,8 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
+import MarkdownContent from '@/components/MarkdownContent.vue';
 import { useApi } from '@/composables/useApi';
-import { parseMarkdown } from '@/utils/richTextParser';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
 
 const openIndex = ref(0);
@@ -54,7 +54,7 @@ const loadAboutData = async () => {
     if (response.data && response.data.text) {
       aboutContent.value = {
         id: response.data.id,
-        htmlContent: parseMarkdown(response.data.text)
+        markdown: response.data.text
       };
     }
   } catch (err) {

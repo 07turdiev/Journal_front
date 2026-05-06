@@ -12,6 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@toast-ui/editor": "^3.2.2",
+    "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
     "@vueuse/head": "^2.0.0",
     "axios": "^1.12.2",
     "dompurify": "^3.3.1",
@@ -19,6 +21,7 @@
     "html2pdf.js": "^0.10.3",
     "jspdf": "^3.0.3",
     "marked": "^17.0.1",
+    "prismjs": "^1.30.0",
     "qrcode": "^1.5.4",
     "vue": "^3.5.22",
     "vue-i18n": "^11.1.12",

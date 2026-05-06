@@ -24,7 +24,7 @@
             <p class="announcement-date">{{ announcement.date }}</p>
           </div>
 
-          <div class="announcement-content" v-html="announcement.htmlContent || announcement.content"></div>
+          <MarkdownContent class="announcement-content" :markdown="announcement.markdown" :blocks="announcement.blocks" />
         </div>
         
         <!-- Not found -->
@@ -41,9 +41,10 @@ import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
+import MarkdownContent from '@/components/MarkdownContent.vue';
 import { useApi } from '@/composables/useApi';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
-import { getPlainText, parseRichText } from '@/utils/richTextParser';
+import { getPlainText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -87,7 +88,8 @@ const loadAnnouncementData = async (slug) => {
           id: fullAnnouncementData.id,
           title: fullAnnouncementData.Nomi,
           content: getPlainText(fullAnnouncementData.Text),
-          htmlContent: parseRichText(fullAnnouncementData.Text),
+          markdown: fullAnnouncementData.Text_md || '',
+          blocks: fullAnnouncementData.Text || [],
           date: fullAnnouncementData.Sana,
           slug: uzSlug, // O'zbek tilidagi slug'ni ishlatish
           image: getImageUrl(fullAnnouncementData.Rasmi)

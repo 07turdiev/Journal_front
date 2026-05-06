@@ -24,7 +24,7 @@
             <p class="event-date">{{ event.date }}</p>
           </div>
 
-          <div class="event-content" v-html="event.htmlContent || event.content"></div>
+          <MarkdownContent class="event-content" :markdown="event.markdown" :blocks="event.blocks" />
         </div>
         
         <!-- Not found -->
@@ -41,9 +41,10 @@ import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
+import MarkdownContent from '@/components/MarkdownContent.vue';
 import { useApi } from '@/composables/useApi';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
-import { getPlainText, parseRichText } from '@/utils/richTextParser';
+import { getPlainText } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -87,7 +88,8 @@ const loadEventData = async (slug) => {
           id: fullEventData.id,
           title: fullEventData.Nomi,
           content: getPlainText(fullEventData.Text),
-          htmlContent: parseRichText(fullEventData.Text),
+          markdown: fullEventData.Text_md || '',
+          blocks: fullEventData.Text || [],
           date: fullEventData.Sana,
           slug: uzSlug, // O'zbek tilidagi slug'ni ishlatish
           image: getImageUrl(fullEventData.Rasmi?.[0]) // Rasmi array bo'lsa, birinchi elementini olish

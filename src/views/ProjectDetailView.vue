@@ -35,7 +35,13 @@
               <p class="project-description">{{ project.description }}</p>
             </div>
 
-            <div v-if="project.fullDescription" class="project-full-description" v-html="project.fullDescription"></div>
+            <MarkdownContent
+              v-if="project.markdown || (project.blocks && project.blocks.length)"
+              class="project-full-description"
+              :markdown="project.markdown"
+              :blocks="project.blocks"
+            />
+            <div v-else-if="project.fullDescription" class="project-full-description" v-html="project.fullDescription"></div>
 
             <div v-if="project.link && project.link !== '#'" class="project-actions">
               <a :href="project.link" target="_blank" class="project-action-btn">
@@ -62,10 +68,9 @@ import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
+import MarkdownContent from '@/components/MarkdownContent.vue';
 import { useApi } from '@/composables/useApi';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
-import { parseMarkdown, parseRichText } from '@/utils/richTextParser';
-import DOMPurify from 'dompurify';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -105,26 +110,18 @@ const loadProjectData = async (slug) => {
     const data = item.attributes ? item.attributes : item
     const img = pickImage(data.rasmi)
 
-    let fullDesc = ''
-
-    if (typeof data.text === 'string' && data.text.trim() !== '') {
-      fullDesc = parseMarkdown(data.text)
-    } else if (Array.isArray(data.text) && data.text.length) {
-      // parse structured rich text blocks and sanitize the result
-      fullDesc = DOMPurify.sanitize(parseRichText(data.text), {
-        ADD_TAGS: ['center'],
-        ADD_ATTR: ['target', 'rel']
-      })
-    } else {
-      fullDesc = data.fullDescription || ''
-    }
+    // Project full text — pass raw markdown / blocks straight to MarkdownContent.
+    const markdownText = typeof data.text === 'string' ? data.text : ''
+    const blocksText = Array.isArray(data.text) ? data.text : []
 
     project.value = {
       id: item.id || data.id,
       slug: data.slug || '',
       title: data.nomi || data.title || '',
       description: data.tavsif || data.description || '',
-      fullDescription: fullDesc,
+      markdown: markdownText,
+      blocks: blocksText,
+      fullDescription: data.fullDescription || '',
       date: data.sana ? new Date(data.sana).toLocaleDateString() : (data.sana || ''),
       category: data.yanalish || data.category || '',
       image: getImageUrl(img),

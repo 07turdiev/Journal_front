@@ -20,7 +20,7 @@
             <div class="member-details">
               <img :src="member.image" :alt="member.name" class="member-photo" @error="handleImageError">
               <div class="member-info">
-                <div v-html="member.htmlDescription || member.description" class="member-description"></div>
+                <MarkdownContent :markdown="member.markdown" :blocks="member.blocks" class="member-description" />
                 <div class="member-contacts">
                   <div class="contact-item">
                     <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,8 @@ import { useRoute } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
-import { getPlainText, parseRichText } from '@/utils/richTextParser';
+import { getPlainText } from '@/utils/richTextParser';
+import MarkdownContent from '@/components/MarkdownContent.vue';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -75,7 +76,8 @@ const loadEditorialBoardData = async () => {
         id: member.id,
         name: member.Ismi,
         description: getPlainText(member.Text),
-        htmlDescription: parseRichText(member.Text),
+        markdown: member.Text_md || '',
+        blocks: member.Text || [],
         phone: member.Telefoni,
         email: member.email,
         image: getImageUrl(member.Rasmi)

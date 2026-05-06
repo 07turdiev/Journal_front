@@ -36,7 +36,7 @@
                         </div>
               </div>
               <div class="faq-answer-wrapper" :class="{ 'open': openIndex === index }">
-                <div class="faq-answer" v-html="faq.htmlAnswer || faq.answer"></div>
+                <MarkdownContent class="faq-answer" :markdown="faq.markdown" :blocks="faq.blocks" />
               </div>
                         </div>
                     </div>
@@ -53,7 +53,8 @@ import { useI18n } from 'vue-i18n';
 import PageBanner from '@/components/PageBanner.vue';
 import { useApi } from '@/composables/useApi';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
-import { getPlainText, parseRichText } from '@/utils/richTextParser';
+import { getPlainText } from '@/utils/richTextParser';
+import MarkdownContent from '@/components/MarkdownContent.vue';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -86,7 +87,8 @@ const loadFaqsData = async () => {
         id: faq.id,
         question: faq.Savol,
         answer: getPlainText(faq.Javob),
-        htmlAnswer: parseRichText(faq.Javob)
+        markdown: faq.Javob_md || '',
+        blocks: faq.Javob || []
       }));
       openIndex.value = 0;
     } else {

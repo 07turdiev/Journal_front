@@ -17,7 +17,7 @@
         
         <!-- Content -->
         <div v-else-if="guideContent" class="content-wrapper">
-          <div class="markdown-content" v-html="guideContent.htmlContent"></div>
+          <MarkdownContent :markdown="guideContent.markdown" />
         </div>
         
         <!-- No content -->
@@ -34,9 +34,9 @@ import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import PageBanner from '@/components/PageBanner.vue';
+import MarkdownContent from '@/components/MarkdownContent.vue';
 import { useApi } from '@/composables/useApi';
 import { useDynamicSeoMeta } from '@/composables/useDynamicSeoMeta';
-import { parseMarkdown } from '@/utils/richTextParser';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -58,7 +58,7 @@ const loadGuideData = async () => {
     if (response.data && response.data.text) {
       guideContent.value = {
         id: response.data.id,
-        htmlContent: parseMarkdown(response.data.text)
+        markdown: response.data.text
       };
     }
   } catch (err) {
